@@ -20,6 +20,44 @@
 		D85DDA6B1753A1C20006E2AB /* DNDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D85DDA6A1753A1C20006E2AB /* DNDetailViewController.m */; };
 		D85DDA6E1753A1C20006E2AB /* DNMasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D85DDA6C1753A1C20006E2AB /* DNMasterViewController.xib */; };
 		D85DDA711753A1C20006E2AB /* DNDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D85DDA6F1753A1C20006E2AB /* DNDetailViewController.xib */; };
+		D85DDA7B1753A28B0006E2AB /* HTMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = D85DDA781753A28B0006E2AB /* HTMLNode.m */; };
+		D85DDA7C1753A28B0006E2AB /* HTMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D85DDA7A1753A28B0006E2AB /* HTMLParser.m */; };
+		D85DDA801753A2A30006E2AB /* DNStory.m in Sources */ = {isa = PBXBuildFile; fileRef = D85DDA7F1753A2A30006E2AB /* DNStory.m */; };
+		D85DDA821753A3940006E2AB /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D85DDA811753A3940006E2AB /* libxml2.dylib */; };
+		D85DDA851753A6B50006E2AB /* DNCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D85DDA841753A6B50006E2AB /* DNCell.m */; };
+		D85DDA871753A6C50006E2AB /* DNCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D85DDA861753A6C50006E2AB /* DNCell.xib */; };
+		D8C73E061753E54C00275EC2 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8C73E041753E54C00275EC2 /* libTestFlight.a */; };
+		D8C73E361753E69500275EC2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D85DDA5A1753A1C20006E2AB /* main.m */; };
+		D8C73E371753E69500275EC2 /* DNAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D85DDA5E1753A1C20006E2AB /* DNAppDelegate.m */; };
+		D8C73E381753E69500275EC2 /* DNMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D85DDA671753A1C20006E2AB /* DNMasterViewController.m */; };
+		D8C73E391753E69500275EC2 /* DNDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D85DDA6A1753A1C20006E2AB /* DNDetailViewController.m */; };
+		D8C73E3A1753E69500275EC2 /* HTMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = D85DDA781753A28B0006E2AB /* HTMLNode.m */; };
+		D8C73E3B1753E69500275EC2 /* HTMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D85DDA7A1753A28B0006E2AB /* HTMLParser.m */; };
+		D8C73E3C1753E69500275EC2 /* DNStory.m in Sources */ = {isa = PBXBuildFile; fileRef = D85DDA7F1753A2A30006E2AB /* DNStory.m */; };
+		D8C73E3D1753E69500275EC2 /* DNCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D85DDA841753A6B50006E2AB /* DNCell.m */; };
+		D8C73E3F1753E69500275EC2 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D85DDA811753A3940006E2AB /* libxml2.dylib */; };
+		D8C73E401753E69500275EC2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D85DDA4E1753A1C20006E2AB /* UIKit.framework */; };
+		D8C73E411753E69500275EC2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D85DDA501753A1C20006E2AB /* Foundation.framework */; };
+		D8C73E421753E69500275EC2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D85DDA521753A1C20006E2AB /* CoreGraphics.framework */; };
+		D8C73E431753E69500275EC2 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8C73E041753E54C00275EC2 /* libTestFlight.a */; };
+		D8C73E451753E69500275EC2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D85DDA571753A1C20006E2AB /* InfoPlist.strings */; };
+		D8C73E461753E69500275EC2 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D85DDA601753A1C20006E2AB /* Default.png */; };
+		D8C73E471753E69500275EC2 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D85DDA621753A1C20006E2AB /* Default@2x.png */; };
+		D8C73E481753E69500275EC2 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D85DDA641753A1C20006E2AB /* Default-568h@2x.png */; };
+		D8C73E491753E69500275EC2 /* DNMasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D85DDA6C1753A1C20006E2AB /* DNMasterViewController.xib */; };
+		D8C73E4A1753E69500275EC2 /* DNDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D85DDA6F1753A1C20006E2AB /* DNDetailViewController.xib */; };
+		D8C73E4B1753E69500275EC2 /* DNCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D85DDA861753A6C50006E2AB /* DNCell.xib */; };
+		D8C73E521753E96300275EC2 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D8C73E511753E96300275EC2 /* libz.dylib */; };
+		D8C73E551753EE2D00275EC2 /* DNRIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = D8C73E541753EE2D00275EC2 /* DNRIcon.png */; };
+		D8C73E571753EE3000275EC2 /* DNRIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8C73E561753EE3000275EC2 /* DNRIcon@2x.png */; };
+		D8C73E5A1753EF7900275EC2 /* navbar.png in Resources */ = {isa = PBXBuildFile; fileRef = D8C73E581753EF7900275EC2 /* navbar.png */; };
+		D8C73E5B1753EF7900275EC2 /* navbar.png in Resources */ = {isa = PBXBuildFile; fileRef = D8C73E581753EF7900275EC2 /* navbar.png */; };
+		D8C73E5C1753EF7900275EC2 /* navbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8C73E591753EF7900275EC2 /* navbar@2x.png */; };
+		D8C73E5D1753EF7900275EC2 /* navbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8C73E591753EF7900275EC2 /* navbar@2x.png */; };
+		D8EF47DE1753F4530024B9C1 /* toolbar.png in Resources */ = {isa = PBXBuildFile; fileRef = D8EF47DC1753F4530024B9C1 /* toolbar.png */; };
+		D8EF47DF1753F4530024B9C1 /* toolbar.png in Resources */ = {isa = PBXBuildFile; fileRef = D8EF47DC1753F4530024B9C1 /* toolbar.png */; };
+		D8EF47E01753F4530024B9C1 /* toolbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8EF47DD1753F4530024B9C1 /* toolbar@2x.png */; };
+		D8EF47E11753F4530024B9C1 /* toolbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8EF47DD1753F4530024B9C1 /* toolbar@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +80,27 @@
 		D85DDA6A1753A1C20006E2AB /* DNDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DNDetailViewController.m; sourceTree = "<group>"; };
 		D85DDA6D1753A1C20006E2AB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DNMasterViewController.xib; sourceTree = "<group>"; };
 		D85DDA701753A1C20006E2AB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DNDetailViewController.xib; sourceTree = "<group>"; };
+		D85DDA771753A28B0006E2AB /* HTMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLNode.h; sourceTree = "<group>"; };
+		D85DDA781753A28B0006E2AB /* HTMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLNode.m; sourceTree = "<group>"; };
+		D85DDA791753A28B0006E2AB /* HTMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLParser.h; sourceTree = "<group>"; };
+		D85DDA7A1753A28B0006E2AB /* HTMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLParser.m; sourceTree = "<group>"; };
+		D85DDA7E1753A2A30006E2AB /* DNStory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNStory.h; sourceTree = "<group>"; };
+		D85DDA7F1753A2A30006E2AB /* DNStory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DNStory.m; sourceTree = "<group>"; };
+		D85DDA811753A3940006E2AB /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		D85DDA831753A6B50006E2AB /* DNCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNCell.h; sourceTree = "<group>"; };
+		D85DDA841753A6B50006E2AB /* DNCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DNCell.m; sourceTree = "<group>"; };
+		D85DDA861753A6C50006E2AB /* DNCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DNCell.xib; sourceTree = "<group>"; };
+		D8C73E041753E54C00275EC2 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		D8C73E051753E54C00275EC2 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		D8C73E4F1753E69500275EC2 /* DNReader α.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DNReader α.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8C73E501753E69600275EC2 /* DNReader α-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "DNReader α-Info.plist"; path = "/Users/flogehring/Dropbox/XcodeProjects/DNReader/DNReader α-Info.plist"; sourceTree = "<absolute>"; };
+		D8C73E511753E96300275EC2 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		D8C73E541753EE2D00275EC2 /* DNRIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DNRIcon.png; sourceTree = "<group>"; };
+		D8C73E561753EE3000275EC2 /* DNRIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DNRIcon@2x.png"; sourceTree = "<group>"; };
+		D8C73E581753EF7900275EC2 /* navbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = navbar.png; path = assets/navbar.png; sourceTree = "<group>"; };
+		D8C73E591753EF7900275EC2 /* navbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navbar@2x.png"; path = "assets/navbar@2x.png"; sourceTree = "<group>"; };
+		D8EF47DC1753F4530024B9C1 /* toolbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = toolbar.png; path = assets/toolbar.png; sourceTree = "<group>"; };
+		D8EF47DD1753F4530024B9C1 /* toolbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "toolbar@2x.png"; path = "assets/toolbar@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,9 +108,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D85DDA821753A3940006E2AB /* libxml2.dylib in Frameworks */,
 				D85DDA4F1753A1C20006E2AB /* UIKit.framework in Frameworks */,
 				D85DDA511753A1C20006E2AB /* Foundation.framework in Frameworks */,
 				D85DDA531753A1C20006E2AB /* CoreGraphics.framework in Frameworks */,
+				D8C73E061753E54C00275EC2 /* libTestFlight.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8C73E3E1753E69500275EC2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8C73E521753E96300275EC2 /* libz.dylib in Frameworks */,
+				D8C73E3F1753E69500275EC2 /* libxml2.dylib in Frameworks */,
+				D8C73E401753E69500275EC2 /* UIKit.framework in Frameworks */,
+				D8C73E411753E69500275EC2 /* Foundation.framework in Frameworks */,
+				D8C73E421753E69500275EC2 /* CoreGraphics.framework in Frameworks */,
+				D8C73E431753E69500275EC2 /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,9 +135,13 @@
 		D85DDA421753A1C10006E2AB = {
 			isa = PBXGroup;
 			children = (
+				D8C73E561753EE3000275EC2 /* DNRIcon@2x.png */,
+				D8C73E541753EE2D00275EC2 /* DNRIcon.png */,
+				D8C73E511753E96300275EC2 /* libz.dylib */,
 				D85DDA541753A1C20006E2AB /* DNReader */,
 				D85DDA4D1753A1C20006E2AB /* Frameworks */,
 				D85DDA4C1753A1C20006E2AB /* Products */,
+				D8C73E501753E69600275EC2 /* DNReader α-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				D85DDA4B1753A1C20006E2AB /* DNReader.app */,
+				D8C73E4F1753E69500275EC2 /* DNReader α.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -78,6 +157,7 @@
 		D85DDA4D1753A1C20006E2AB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D85DDA811753A3940006E2AB /* libxml2.dylib */,
 				D85DDA4E1753A1C20006E2AB /* UIKit.framework */,
 				D85DDA501753A1C20006E2AB /* Foundation.framework */,
 				D85DDA521753A1C20006E2AB /* CoreGraphics.framework */,
@@ -88,14 +168,22 @@
 		D85DDA541753A1C20006E2AB /* DNReader */ = {
 			isa = PBXGroup;
 			children = (
+				D8C73E531753EE0600275EC2 /* assets */,
+				D85DDA7D1753A28E0006E2AB /* Parser */,
 				D85DDA5D1753A1C20006E2AB /* DNAppDelegate.h */,
 				D85DDA5E1753A1C20006E2AB /* DNAppDelegate.m */,
 				D85DDA661753A1C20006E2AB /* DNMasterViewController.h */,
 				D85DDA671753A1C20006E2AB /* DNMasterViewController.m */,
+				D85DDA831753A6B50006E2AB /* DNCell.h */,
+				D85DDA841753A6B50006E2AB /* DNCell.m */,
+				D85DDA861753A6C50006E2AB /* DNCell.xib */,
 				D85DDA691753A1C20006E2AB /* DNDetailViewController.h */,
 				D85DDA6A1753A1C20006E2AB /* DNDetailViewController.m */,
+				D85DDA7E1753A2A30006E2AB /* DNStory.h */,
+				D85DDA7F1753A2A30006E2AB /* DNStory.m */,
 				D85DDA6C1753A1C20006E2AB /* DNMasterViewController.xib */,
 				D85DDA6F1753A1C20006E2AB /* DNDetailViewController.xib */,
+				D8C73E051753E54C00275EC2 /* TestFlight.h */,
 				D85DDA551753A1C20006E2AB /* Supporting Files */,
 			);
 			path = DNReader;
@@ -104,6 +192,7 @@
 		D85DDA551753A1C20006E2AB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D8C73E041753E54C00275EC2 /* libTestFlight.a */,
 				D85DDA561753A1C20006E2AB /* DNReader-Info.plist */,
 				D85DDA571753A1C20006E2AB /* InfoPlist.strings */,
 				D85DDA5A1753A1C20006E2AB /* main.m */,
@@ -113,6 +202,28 @@
 				D85DDA641753A1C20006E2AB /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D85DDA7D1753A28E0006E2AB /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				D85DDA771753A28B0006E2AB /* HTMLNode.h */,
+				D85DDA781753A28B0006E2AB /* HTMLNode.m */,
+				D85DDA791753A28B0006E2AB /* HTMLParser.h */,
+				D85DDA7A1753A28B0006E2AB /* HTMLParser.m */,
+			);
+			name = Parser;
+			sourceTree = "<group>";
+		};
+		D8C73E531753EE0600275EC2 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				D8EF47DC1753F4530024B9C1 /* toolbar.png */,
+				D8EF47DD1753F4530024B9C1 /* toolbar@2x.png */,
+				D8C73E581753EF7900275EC2 /* navbar.png */,
+				D8C73E591753EF7900275EC2 /* navbar@2x.png */,
+			);
+			name = assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -133,6 +244,23 @@
 			name = DNReader;
 			productName = DNReader;
 			productReference = D85DDA4B1753A1C20006E2AB /* DNReader.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D8C73E341753E69500275EC2 /* DNReader α */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D8C73E4C1753E69500275EC2 /* Build configuration list for PBXNativeTarget "DNReader α" */;
+			buildPhases = (
+				D8C73E351753E69500275EC2 /* Sources */,
+				D8C73E3E1753E69500275EC2 /* Frameworks */,
+				D8C73E441753E69500275EC2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "DNReader α";
+			productName = DNReader;
+			productReference = D8C73E4F1753E69500275EC2 /* DNReader α.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -158,6 +286,7 @@
 			projectRoot = "";
 			targets = (
 				D85DDA4A1753A1C20006E2AB /* DNReader */,
+				D8C73E341753E69500275EC2 /* DNReader α */,
 			);
 		};
 /* End PBXProject section */
@@ -173,6 +302,31 @@
 				D85DDA651753A1C20006E2AB /* Default-568h@2x.png in Resources */,
 				D85DDA6E1753A1C20006E2AB /* DNMasterViewController.xib in Resources */,
 				D85DDA711753A1C20006E2AB /* DNDetailViewController.xib in Resources */,
+				D85DDA871753A6C50006E2AB /* DNCell.xib in Resources */,
+				D8C73E5A1753EF7900275EC2 /* navbar.png in Resources */,
+				D8C73E5C1753EF7900275EC2 /* navbar@2x.png in Resources */,
+				D8EF47DE1753F4530024B9C1 /* toolbar.png in Resources */,
+				D8EF47E01753F4530024B9C1 /* toolbar@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8C73E441753E69500275EC2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8C73E451753E69500275EC2 /* InfoPlist.strings in Resources */,
+				D8C73E461753E69500275EC2 /* Default.png in Resources */,
+				D8C73E471753E69500275EC2 /* Default@2x.png in Resources */,
+				D8C73E481753E69500275EC2 /* Default-568h@2x.png in Resources */,
+				D8C73E491753E69500275EC2 /* DNMasterViewController.xib in Resources */,
+				D8C73E4A1753E69500275EC2 /* DNDetailViewController.xib in Resources */,
+				D8C73E4B1753E69500275EC2 /* DNCell.xib in Resources */,
+				D8C73E551753EE2D00275EC2 /* DNRIcon.png in Resources */,
+				D8C73E571753EE3000275EC2 /* DNRIcon@2x.png in Resources */,
+				D8C73E5B1753EF7900275EC2 /* navbar.png in Resources */,
+				D8C73E5D1753EF7900275EC2 /* navbar@2x.png in Resources */,
+				D8EF47DF1753F4530024B9C1 /* toolbar.png in Resources */,
+				D8EF47E11753F4530024B9C1 /* toolbar@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,6 +341,25 @@
 				D85DDA5F1753A1C20006E2AB /* DNAppDelegate.m in Sources */,
 				D85DDA681753A1C20006E2AB /* DNMasterViewController.m in Sources */,
 				D85DDA6B1753A1C20006E2AB /* DNDetailViewController.m in Sources */,
+				D85DDA7B1753A28B0006E2AB /* HTMLNode.m in Sources */,
+				D85DDA7C1753A28B0006E2AB /* HTMLParser.m in Sources */,
+				D85DDA801753A2A30006E2AB /* DNStory.m in Sources */,
+				D85DDA851753A6B50006E2AB /* DNCell.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8C73E351753E69500275EC2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8C73E361753E69500275EC2 /* main.m in Sources */,
+				D8C73E371753E69500275EC2 /* DNAppDelegate.m in Sources */,
+				D8C73E381753E69500275EC2 /* DNMasterViewController.m in Sources */,
+				D8C73E391753E69500275EC2 /* DNDetailViewController.m in Sources */,
+				D8C73E3A1753E69500275EC2 /* HTMLNode.m in Sources */,
+				D8C73E3B1753E69500275EC2 /* HTMLParser.m in Sources */,
+				D8C73E3C1753E69500275EC2 /* DNStory.m in Sources */,
+				D8C73E3D1753E69500275EC2 /* DNCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,7 +454,12 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DNReader/DNReader-Prefix.pch";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "DNReader/DNReader-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/DNReader\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -292,8 +470,58 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DNReader/DNReader-Prefix.pch";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "DNReader/DNReader-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/DNReader\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		D8C73E4D1753E69500275EC2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DNReader/DNReader-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"TESTFLIGHT=1",
+				);
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
+				INFOPLIST_FILE = "DNReader α-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/DNReader\"",
+				);
+				PRODUCT_NAME = "DNReader α";
+				VALID_ARCHS = "armv7 armv7s i386";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D8C73E4E1753E69500275EC2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Florian Gehring";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Florian Gehring";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DNReader/DNReader-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = "TESTFLIGHT=1";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
+				INFOPLIST_FILE = "DNReader α-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/DNReader\"",
+				);
+				PRODUCT_NAME = "DNReader α";
+				PROVISIONING_PROFILE = "E3AE012E-9577-4DB3-966A-AB11C7E7CB0E";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E3AE012E-9577-4DB3-966A-AB11C7E7CB0E";
+				VALID_ARCHS = "armv7 armv7s i386";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -317,6 +545,16 @@
 				D85DDA761753A1C20006E2AB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D8C73E4C1753E69500275EC2 /* Build configuration list for PBXNativeTarget "DNReader α" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D8C73E4D1753E69500275EC2 /* Debug */,
+				D8C73E4E1753E69500275EC2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

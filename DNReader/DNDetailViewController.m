@@ -29,18 +29,46 @@
 - (void)configureView
 {
     // Update the user interface for the detail item.
-
 	if (self.detailItem) {
-	    self.detailDescriptionLabel.text = [self.detailItem description];
+	    self.title = self.detailItem.storyTitle;
+		self.webview.scalesPageToFit = YES;
 	}
+	
+	
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+	[self loadPage];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-	[self configureView];
+//	[self configureView];
 }
+
+-(void)loadPage
+{
+	if (self.detailItem) {
+		
+		NSString *urlString = self.detailItem.sourceURL;
+		if (![urlString hasPrefix:@"http://"] &&  ![urlString hasPrefix:@"https://"]) {
+			if ([urlString hasPrefix:@"/stories/"]) {
+				urlString = [NSString stringWithFormat:@"https://news.layervault.com%@", urlString];
+			}else{
+				urlString = @"https://news.layervault.com/404";
+			}
+
+		}
+		
+		NSURL *url = [[NSURL alloc] initWithString:self.detailItem.sourceURL];
+		NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
+		
+		[self.webview loadRequest:requestObj];
+		
+	}}
 
 - (void)didReceiveMemoryWarning
 {
@@ -57,4 +85,7 @@
     return self;
 }
 							
+- (IBAction)refreshButtonTapped:(id)sender {
+	[self.webview reload];
+}
 @end
