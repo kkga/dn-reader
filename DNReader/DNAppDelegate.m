@@ -19,7 +19,7 @@
 	
 #ifdef TESTFLIGHT
 	[TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
-	[TestFlight takeOff:@"c32bb24b-4fd7-4915-984f-3d6d4bbdf0e9"];
+	[TestFlight takeOff:@"82256e4f-ca35-4930-a539-c4b0062bb8c1"];
 #endif
 	
 	[[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbar"] forBarMetrics:UIBarMetricsDefault];

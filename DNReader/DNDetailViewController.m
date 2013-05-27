@@ -32,6 +32,7 @@
 	if (self.detailItem) {
 	    self.title = self.detailItem.storyTitle;
 		self.webview.scalesPageToFit = YES;
+
 	}
 	
 	
@@ -87,5 +88,32 @@
 							
 - (IBAction)refreshButtonTapped:(id)sender {
 	[self.webview reload];
+}
+
+- (IBAction)webBackTapped:(id)sender {
+	[self.webview goBack];
+}
+
+- (IBAction)shareButtonTapped:(id)sender {
+	
+	NSURL *shareURL = [NSURL URLWithString:self.detailItem.sourceURL];
+	
+	NSString *textToShare = @"Look what I've found on DesignerNews… ";
+	NSArray *activityItems = @[textToShare, shareURL];
+
+	
+	UIActivityViewController *activityVC = [[UIActivityViewController alloc]initWithActivityItems:activityItems applicationActivities:nil];
+	activityVC.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact,UIActivityTypeCopyToPasteboard];
+	[activityVC setCompletionHandler:^(NSString *activityType, BOOL completed){
+		if (completed) {
+			NSLog(@"Shared to %@", activityType);
+#ifdef TESTFLIGHT
+			[TestFlight passCheckpoint:@"Share – Completed sharing"];
+#endif
+		}
+	}];
+	
+	[self presentViewController:activityVC animated:TRUE completion:nil];
+
 }
 @end

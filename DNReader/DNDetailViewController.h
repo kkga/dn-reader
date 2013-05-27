@@ -14,6 +14,8 @@
 @property (strong, nonatomic) DNStory *detailItem;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 - (IBAction)refreshButtonTapped:(id)sender;
+- (IBAction)webBackTapped:(id)sender;
+- (IBAction)shareButtonTapped:(id)sender;
 
 
 @end
