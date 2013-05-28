@@ -6,16 +6,18 @@
 //  Copyright (c) 2013 Flo Gehring. All rights reserved.
 //
 
+
 #import "DNMasterViewController.h"
 #import "HTMLParser.h"
 #import "DNStory.h"
 #import "DNDetailViewController.h"
 #import "DNCell.h"
-
+#import <QuartzCore/QuartzCore.h>
 @interface DNMasterViewController () {
-    NSMutableArray *_stories;
-	int pagesLoaded;
+
 }
+@property (nonatomic, strong) NSMutableArray *stories;
+@property (nonatomic) int pagesLoaded;
 @end
 
 @implementation DNMasterViewController
@@ -24,8 +26,12 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-		self.title = @"DN";
-		pagesLoaded = 0;
+		self.title = @"DN – Popular";
+		_pagesLoaded = 1;
+		_stories = [[NSMutableArray alloc]init];
+		
+		
+		
     }
     return self;
 }
@@ -33,20 +39,53 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-
-//	UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh)];
-//	self.navigationItem.rightBarButtonItem = refreshButton;
 	
+	UINavigationBar *navBar =  self.navigationController.navigationBar;
+	navBar.layer.masksToBounds = NO;
+	[navBar.layer setShadowColor:[UIColor blackColor].CGColor];
+	[navBar.layer setShadowOffset:(CGSize){0,2}];
+	[navBar.layer setShadowOpacity:.25];
+	
+	
+	
+	_currentList = kDNStoryListTypePopular;
 	
 	UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-	[refreshControl addTarget:self action:@selector(refreshForPage:) forControlEvents:UIControlEventValueChanged];
+	[refreshControl addTarget:self action:@selector(refreshPulled) forControlEvents:UIControlEventValueChanged];
 	self.refreshControl = refreshControl;
 	
+	[self refreshPulled];
+	
+	
 	[self.tableView registerNib:[UINib nibWithNibName:@"DNCell" bundle:nil] forCellReuseIdentifier:@"DNCell"];
+	
+	UISwipeGestureRecognizer *swiper = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(switchList)];
+	[self.navigationController.navigationBar addGestureRecognizer:swiper];
 
 }
 
+
+-(void)refreshPulled
+{
+
+	[self.refreshControl beginRefreshing];
+	_pagesLoaded = 1;
+	[self refreshForPage:1];
+}
+
+-(void)switchList
+{
+	NSLog(@"Switch the list");
+	if (_currentList == kDNStoryListTypePopular) {
+		_currentList = kDNStoryListTypeRecent;
+		self.title = @"DN – Recent";
+	}else{
+		_currentList = kDNStoryListTypePopular;
+		self.title = @"DN – Popular";
+	}
+	
+	[self refreshPulled];
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -164,23 +203,53 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	DNStory *story = [_stories objectAtIndex:indexPath.row];
     if (!self.detailViewController) {
-        self.detailViewController = [[DNDetailViewController alloc] initWithNibName:@"DNDetailViewController" bundle:nil];
+				
+        self.detailViewController = [[DNDetailViewController alloc] initWithAddress:@"about:blank"];
     }
-    id object = _stories[indexPath.row];
-    self.detailViewController.detailItem = object;
+	
+	NSString *urlString = story.sourceURL;
+	if (![urlString hasPrefix:@"http://"] &&  ![urlString hasPrefix:@"https://"]) {
+		if ([urlString hasPrefix:@"/stories/"]) {
+			urlString = [NSString stringWithFormat:@"https://news.layervault.com%@", urlString];
+		}else{
+			urlString = @"https://news.layervault.com/404";
+		}
+		
+	}
+	NSURL *url = [[NSURL alloc] initWithString:urlString];
+	story.targetURL = url;
+	
+    self.detailViewController.detailItem = story;
     [self.navigationController pushViewController:self.detailViewController animated:YES];
 }
 
 
 -(void)refreshForPage: (int) pageNumber
 {
+	[self.refreshControl beginRefreshing];
+	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+
 	
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^(void) {
 	
 		NSError *error = nil;
-		NSURL * url = [NSURL URLWithString:@"https://news.layervault.com/"];
-		//	NSError * error;
+		NSString *urlString = @"https://news.layervault.com/";
+		
+		if (_currentList == kDNStoryListTypeRecent)
+			urlString = [urlString stringByAppendingString:@"new/"];
+		if(_currentList == kDNStoryListTypePopular)
+			urlString = [urlString stringByAppendingString:@"p/"];
+		
+		
+		if (pageNumber == 1) {
+			[_stories removeAllObjects];
+		}
+		urlString = [urlString stringByAppendingFormat:@"%i",pageNumber];
+		
+		NSLog(urlString);
+		NSURL * url = [NSURL URLWithString:urlString];
 		NSStringEncoding * encoding = nil;
 		NSString * htmlContent = [NSString stringWithContentsOfURL:url usedEncoding:encoding error:&error];
 		
@@ -197,7 +266,7 @@
 		
 		NSArray *listItems = [bodyNode findChildrenOfClass:@"Story"];
 		NSLog(@"%i", [listItems count]);
-		_stories = [NSMutableArray arrayWithCapacity:[listItems count]];
+//		_stories = [NSMutableArray arrayWithCapacity:[listItems count]];
 		
 		for (HTMLNode *li in listItems) {
 			DNStory *story = [DNStory new];
@@ -213,17 +282,30 @@
 		}
 		
 		NSLog(@"%i stories", [_stories count]);
-	
+		_pagesLoaded++;
 	
 		dispatch_sync(dispatch_get_main_queue(), ^(void) {
 		
 			NSLog(@"Done");
 			[self.tableView reloadData];
 			[self.refreshControl endRefreshing];
+			[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 		
 		});
 	});
 	
+}
+
+#pragma mark –
+#pragma mark – UIScrollViewDelegate
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+	CGFloat actualPosition = scrollView.contentOffset.y;
+    CGFloat contentHeight = scrollView.contentSize.height - (750);
+    if (actualPosition >= contentHeight && !self.refreshControl.isRefreshing ) {
+        [self refreshForPage: _pagesLoaded];
+        [self.tableView reloadData];
+	}
 }
 
 @end

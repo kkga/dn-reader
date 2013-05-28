@@ -10,8 +10,15 @@
 
 @class DNDetailViewController;
 
-@interface DNMasterViewController : UITableViewController
+typedef enum {
+    kDNStoryListTypePopular,
+    kDNStoryListTypeRecent
+    
+} DNStoryListType;
+
+@interface DNMasterViewController : UITableViewController <UIScrollViewDelegate>
 
 @property (strong, nonatomic) DNDetailViewController *detailViewController;
+@property (nonatomic) DNStoryListType currentList;
 
 @end

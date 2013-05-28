@@ -10,6 +10,7 @@
 
 @interface DNStory : NSObject
 @property (nonatomic, strong) NSString *sourceURL;
+@property (nonatomic, strong) NSURL *targetURL;
 @property (nonatomic, strong) NSString *storyTitle;
 @property (nonatomic, strong) NSString *username;
 @property (nonatomic, strong) NSString *timestamp;

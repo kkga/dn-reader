@@ -14,8 +14,8 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
-				<string>DNRIcon.png</string>
-				<string>DNRIcon@2x.png</string>
+				<string>DNRIcon alpha.png</string>
+				<string>DNRIcon alpha@2x.png</string>
 			</array>
 			<key>UIPrerenderedIcon</key>
 			<true/>
@@ -33,6 +33,17 @@
 	<string>0.01</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.flogehring.dev.DNRe</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>dnr</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>A001</string>
 	<key>LSRequiresIPhoneOS</key>

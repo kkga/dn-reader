@@ -5,17 +5,28 @@
 //  Created by Flo Gehring on 27.05.13.
 //  Copyright (c) 2013 Flo Gehring. All rights reserved.
 //
-
+#import <MessageUI/MessageUI.h>
 #import <UIKit/UIKit.h>
 #import "DNStory.h"
+
+enum {
+    SVWebViewControllerAvailableActionsNone             = 0,
+    SVWebViewControllerAvailableActionsOpenInSafari     = 1 << 0,
+    SVWebViewControllerAvailableActionsMailLink         = 1 << 1,
+    SVWebViewControllerAvailableActionsCopyLink         = 1 << 2,
+    SVWebViewControllerAvailableActionsOpenInChrome     = 1 << 3
+};
+
+typedef NSUInteger SVWebViewControllerAvailableActions;
+
+
 @interface DNDetailViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UIWebView *webview;
+@property (nonatomic, readwrite) SVWebViewControllerAvailableActions availableActions;
 @property (strong, nonatomic) DNStory *detailItem;
-@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
-- (IBAction)refreshButtonTapped:(id)sender;
-- (IBAction)webBackTapped:(id)sender;
-- (IBAction)shareButtonTapped:(id)sender;
 
+- (id)initWithAddress:(NSString*)urlString;
+- (id)initWithURL:(NSURL*)URL;
+- (void)loadURL:(NSURL*)URL;
 
 @end

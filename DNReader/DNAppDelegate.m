@@ -22,24 +22,19 @@
 	[TestFlight takeOff:@"82256e4f-ca35-4930-a539-c4b0062bb8c1"];
 #endif
 	
-	[[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbar"] forBarMetrics:UIBarMetricsDefault];
-	[[UIToolbar appearance] setBackgroundImage:[UIImage imageNamed:@"toolbar"] forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
-	[[UIBarButtonItem appearance] setTintColor:[UIColor colorWithRed:0.09 green:0.278 blue:0.69 alpha:1]];
+
+	
+	[[UINavigationBar appearance] setBackgroundImage:	[[UIImage imageNamed:@"navbar"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 10, 0, 10) resizingMode:UIImageResizingModeStretch] forBarMetrics:UIBarMetricsDefault];
+	
+	[[UIToolbar appearance] setBackgroundImage:	[[UIImage imageNamed:@"toolbar"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 10, 0, 10) resizingMode:UIImageResizingModeStretch] forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
+	
+	[[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTintColor:[UIColor colorWithRed:0.09 green:0.278 blue:0.69 alpha:1]];
+	
 	[[UIRefreshControl appearance]setTintColor:[UIColor colorWithRed:0.251 green:0.478 blue:0.82 alpha:1]];
 	
-//	[[UINavigationBar appearance] setTitleTextAttributes:
-//	 [NSDictionary dictionaryWithObjectsAndKeys:
-//	  [UIFont fontWithName:@"Helvetica" size:20], UITextAttributeFont,
-//	  [UIColor blackColor], UITextAttributeTextColor,
-//	  [UIColor whiteColor], UITextAttributeTextShadowColor,
-//	  [NSValue valueWithUIOffset:UIOffsetMake(0, 1)], UITextAttributeTextShadowOffset,nil]];
-//	[[UINavigationBar appearance] setTitleVerticalPositionAdjustment:-0.5f forBarMetrics:UIBarMetricsDefault];
-//
-	
-	
+
 	
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
 
 	DNMasterViewController *masterViewController = [[DNMasterViewController alloc] initWithNibName:@"DNMasterViewController" bundle:nil];
 	self.navigationController = [[UINavigationController alloc] initWithRootViewController:masterViewController];
