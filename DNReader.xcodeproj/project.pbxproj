@@ -213,7 +213,6 @@
 				D8FF79241754E9C6004A8C7E /* DNRIcon alpha.png */,
 				D8C73E561753EE3000275EC2 /* DNRIcon@2x.png */,
 				D8C73E541753EE2D00275EC2 /* DNRIcon.png */,
-				D8C73E511753E96300275EC2 /* libz.dylib */,
 				D85DDA541753A1C20006E2AB /* DNReader */,
 				D85DDA4D1753A1C20006E2AB /* Frameworks */,
 				D85DDA4C1753A1C20006E2AB /* Products */,
@@ -235,6 +234,7 @@
 			children = (
 				D8FF78E117548534004A8C7E /* MessageUI.framework */,
 				D85DDA811753A3940006E2AB /* libxml2.dylib */,
+				D8C73E511753E96300275EC2 /* libz.dylib */,
 				D85DDA4E1753A1C20006E2AB /* UIKit.framework */,
 				D85DDA501753A1C20006E2AB /* Foundation.framework */,
 				D85DDA521753A1C20006E2AB /* CoreGraphics.framework */,

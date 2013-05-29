@@ -67,7 +67,7 @@
 
 -(void)refreshPulled
 {
-
+	NSLog(@"Refreshing");
 	[self.refreshControl beginRefreshing];
 	_pagesLoaded = 1;
 	[self refreshForPage:1];
@@ -205,25 +205,13 @@
 {
 	DNStory *story = [_stories objectAtIndex:indexPath.row];
     if (!self.detailViewController) {
-				
         self.detailViewController = [[DNDetailViewController alloc] initWithAddress:@"about:blank"];
     }
-	
-	NSString *urlString = story.sourceURL;
-	if (![urlString hasPrefix:@"http://"] &&  ![urlString hasPrefix:@"https://"]) {
-		if ([urlString hasPrefix:@"/stories/"]) {
-			urlString = [NSString stringWithFormat:@"https://news.layervault.com%@", urlString];
-		}else{
-			urlString = @"https://news.layervault.com/404";
-		}
-		
-	}
-	NSURL *url = [[NSURL alloc] initWithString:urlString];
-	story.targetURL = url;
 	
     self.detailViewController.detailItem = story;
     [self.navigationController pushViewController:self.detailViewController animated:YES];
 }
+
 
 
 -(void)refreshForPage: (int) pageNumber
@@ -248,7 +236,7 @@
 		}
 		urlString = [urlString stringByAppendingFormat:@"%i",pageNumber];
 		
-		NSLog(urlString);
+		NSLog(@"%@", urlString);
 		NSURL * url = [NSURL URLWithString:urlString];
 		NSStringEncoding * encoding = nil;
 		NSString * htmlContent = [NSString stringWithContentsOfURL:url usedEncoding:encoding error:&error];
@@ -266,19 +254,21 @@
 		
 		NSArray *listItems = [bodyNode findChildrenOfClass:@"Story"];
 		NSLog(@"%i", [listItems count]);
-//		_stories = [NSMutableArray arrayWithCapacity:[listItems count]];
 		
 		for (HTMLNode *li in listItems) {
 			DNStory *story = [DNStory new];
-			story.sourceURL = [[li findChildOfClass:@"StoryUrl"] getAttributeNamed:@"href"];
+			[story setStoryURLFromString:[[li findChildOfClass:@"StoryUrl"] getAttributeNamed:@"href"]];
 			story.storyTitle = [[li findChildOfClass:@"StoryUrl"] contents];
 			story.username = [[li findChildOfClass:@"Submitter"] contents];
 			story.domain = [[li findChildOfClass:@"Domain"] contents];
-			[_stories addObject:story];
-			
-			story.comments = [[li findChildOfClass:@"CommentCount"] contents];
 			story.points = [[li findChildOfClass:@"PointCount"]contents];
 			story.timestamp = [[li findChildOfClass:@"Timeago"] contents];
+			
+			HTMLNode *commentsLink = [li findChildOfClass:@"CommentCount"];
+			[story setCommentsURLFromString:[commentsLink getAttributeNamed:@"href"]];
+			story.comments = [commentsLink contents];
+			
+			[_stories addObject:story];
 		}
 		
 		NSLog(@"%i stories", [_stories count]);

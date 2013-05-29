@@ -16,14 +16,20 @@ enum {
     SVWebViewControllerAvailableActionsCopyLink         = 1 << 2,
     SVWebViewControllerAvailableActionsOpenInChrome     = 1 << 3
 };
-
 typedef NSUInteger SVWebViewControllerAvailableActions;
+
+typedef enum {
+    kDNDetailViewTypeStory,
+    kDNDetailViewTypeComments
+    
+} DNDetailViewType;
 
 
 @interface DNDetailViewController : UIViewController
 
 @property (nonatomic, readwrite) SVWebViewControllerAvailableActions availableActions;
 @property (strong, nonatomic) DNStory *detailItem;
+
 
 - (id)initWithAddress:(NSString*)urlString;
 - (id)initWithURL:(NSURL*)URL;

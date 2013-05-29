@@ -2,7 +2,7 @@ DN-Reader
 =========
 Simple native iOS app for browsing [Designer News](https://news.layervault.com).
 
-Design by [_kkga](https://twitter.com/_kkga), implementation [@flogehring](https://twitter.com/flogehring). 
+Design by [@_kkga](https://twitter.com/_kkga), implementation [@flogehring](https://twitter.com/flogehring). 
 
 
 Attribution

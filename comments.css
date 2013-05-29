@@ -1,0 +1,73 @@
+#Header, #Footer {display: none;}
+.Content{width: 95%;}
+
+.Story .InnerPage .Badge {
+position: relative;
+margin: 8px auto;
+width: 57px;
+height: 57px;
+}
+
+.Frontpage .InnerPage, #MOTD, .Newest .InnerPage, .Story .InnerPage, .Comment .InnerPage {width:100%; padding: 1em;}
+body{font-size: 16px;}
+.Story .InnerPage h1 a, .Comment .InnerPage h1 a {font-size: 24px; line-height: 1em;}
+.Story .InnerPage h1 span, .Comment .InnerPage h1 span {font-size: 20px;}
+
+.Story .InnerPage p, .Comment .InnerPage p, 
+.Story .InnerPage span, .Comment .InnerPage span,
+.Story .InnerPage a, .Comment .InnerPage a {font-size: 12px;}
+.InnerPage span, .InnerPage span a {font-size: 12px !important;}
+.InnerPage h1 {text-align: left; line-height: 1em;}
+
+
+.Story .InnerPage .StoryBody p, .Comment .InnerPage .StoryBody p {font-size: 12px; line-height: 1.4em;}
+
+
+.Story .InnerPage #Comments, .Comment .InnerPage #Comments {margin: 1em;}
+.Story .InnerPage .Comment, .Comment .InnerPage .Comment {padding: 0 0 1em 0;}
+.Story .InnerPage .Comment .CommentWho, .Comment .InnerPage .Comment .CommentWho {
+	float: none;
+	width: 100%;
+	padding: 5px;
+}
+.Story .InnerPage .Comment .CommentWho .UserPortrait, .Comment .InnerPage .Comment .CommentWho .UserPortrait {
+	margin-right: 0;
+	float: none;
+	display: inline;
+	margin-left: 2px;
+	position: relative;
+}
+
+.Story .InnerPage .Comment .CommentWho a, .Comment .InnerPage .Comment .CommentWho a {
+display: inline;
+}
+
+.Story .InnerPage p, .Comment .InnerPage p {font-size: 10px;}
+.Story .InnerPage .Comment.NestingLevel0 p, 
+.Story .InnerPage .Comment.NestingLevel0 .EditedAgo, 
+.Comment .InnerPage .Comment.NestingLevel0 p, 
+.Comment .InnerPage .Comment.NestingLevel0 .EditedAgo {
+	margin-left: 2em !important;
+	line-height: 1.4em;
+}
+.Story .InnerPage .Comment.NestingLevel1 p, 
+.Story .InnerPage .Comment.NestingLevel1 .EditedAgo, 
+.Comment .InnerPage .Comment.NestingLevel1 p, 
+.Comment .InnerPage .Comment.NestingLevel1 .EditedAgo {
+	margin-left: 4em !important;
+	line-height: 1.4em;
+}
+
+.Story .InnerPage .Comment.NestingLevel2 p, 
+.Story .InnerPage .Comment.NestingLevel2 .EditedAgo, 
+.Comment .InnerPage .Comment.NestingLevel2 p, 
+.Comment .InnerPage .Comment.NestingLevel2 .EditedAgo {
+	margin-left: 6em !important;
+	line-height: 1.4em;
+}
+
+
+.Story .InnerPage .Comment.NestingLevel0 p, .Story .InnerPage .Comment.NestingLevel0 .EditedAgo, .Comment .InnerPage .Comment.NestingLevel0 p, .Comment .InnerPage .Comment.NestingLevel0 .EditedAgo {
+	margin: 0 0 0 2em;
+	line-height: 1.4em;
+}

@@ -18,10 +18,13 @@
 @property (nonatomic, strong, readonly) UIBarButtonItem *refreshBarButtonItem;
 @property (nonatomic, strong, readonly) UIBarButtonItem *stopBarButtonItem;
 @property (nonatomic, strong, readonly) UIBarButtonItem *actionBarButtonItem;
+@property (nonatomic, strong, readonly) UIBarButtonItem *commentsBarButtonItem;
 @property (nonatomic, strong, readonly) UIActionSheet *pageActionSheet;
 
 @property (nonatomic, strong) UIWebView *mainWebView;
 @property (nonatomic, strong) NSURL *URL;
+
+@property (nonatomic) DNDetailViewType currentViewType;
 
 @property (nonatomic, strong) UIActivityViewController *activityVC;
 
@@ -42,7 +45,7 @@
 @synthesize availableActions;
 
 @synthesize URL, mainWebView;
-@synthesize backBarButtonItem, forwardBarButtonItem, refreshBarButtonItem, stopBarButtonItem, actionBarButtonItem, pageActionSheet;
+@synthesize backBarButtonItem, forwardBarButtonItem, refreshBarButtonItem, stopBarButtonItem, actionBarButtonItem, pageActionSheet, commentsBarButtonItem;
 
 #pragma mark - setters and getters
 
@@ -54,6 +57,16 @@
 		backBarButtonItem.width = 18.0f;
     }
     return backBarButtonItem;
+}
+
+-(UIBarButtonItem *)commentsBarButtonItem
+{
+	if (!commentsBarButtonItem) {
+        commentsBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(commentsButtonTapped:)];
+//        commentsBarButtonItem.imageInsets = UIEdgeInsetsMake(2.0f, 0.0f, -2.0f, 0.0f);
+//		commentsBarButtonItem.width = 18.0f;
+    }
+    return commentsBarButtonItem;
 }
 
 - (UIBarButtonItem *)forwardBarButtonItem {
@@ -152,7 +165,7 @@
 	DNActivityProvider *actProvider = [[DNActivityProvider alloc] init];
 	[actProvider setStory:self.detailItem];
 	
-	NSArray* dataToShare = @[actProvider, self.detailItem.targetURL];
+	NSArray* dataToShare = @[actProvider, self.detailItem.storyURL];
 	
     NSArray *applicationActivities = @[safariActivity, chromeActivity];
     
@@ -174,26 +187,24 @@
 }
 
 - (void)viewDidLoad {
+	_currentViewType = kDNDetailViewTypeStory;
 	[super viewDidLoad];
     [self updateToolbarItems];
 }
 
-- (void)viewDidUnload {
-    [super viewDidUnload];
-    mainWebView = nil;
-    backBarButtonItem = nil;
-    forwardBarButtonItem = nil;
-    refreshBarButtonItem = nil;
-    stopBarButtonItem = nil;
-    actionBarButtonItem = nil;
-    pageActionSheet = nil;
-}
 
 - (void)viewWillAppear:(BOOL)animated {
     NSAssert(self.navigationController, @"SVWebViewController needs to be contained in a UINavigationController. If you are presenting SVWebViewController modally, use SVModalWebViewController instead.");
     
 	[super viewWillAppear:animated];
-	[self loadURL:self.detailItem.targetURL];
+	
+	if (_currentViewType == kDNDetailViewTypeStory) {
+		[self loadURL:self.detailItem.storyURL];
+	}else{
+		[self loadURL:self.detailItem.commentsURL];
+	}
+	
+	
 	
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         [self.navigationController setToolbarHidden:NO animated:animated];
@@ -235,6 +246,7 @@
 #pragma mark - Toolbar
 
 - (void)updateToolbarItems {
+	
     self.backBarButtonItem.enabled = self.mainWebView.canGoBack;
     self.forwardBarButtonItem.enabled = self.mainWebView.canGoForward;
     self.actionBarButtonItem.enabled = YES;
@@ -279,6 +291,9 @@
 		toolbar.barStyle = self.navigationController.navigationBar.barStyle;
         toolbar.tintColor = self.navigationController.navigationBar.tintColor;
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:toolbar];
+		
+		
+		
     }
     
     else {
@@ -311,7 +326,48 @@
 		self.navigationController.toolbar.barStyle = self.navigationController.navigationBar.barStyle;
 		self.navigationController.toolbar.tintColor = self.navigationController.navigationBar.tintColor;
         self.toolbarItems = items;
+		
+		//Only show the switch button if there is a link
+		if ( ! [_detailItem.commentsURL isEqual:_detailItem.storyURL]) {
+			self.navigationItem.rightBarButtonItem = self.commentsBarButtonItem;
+		}else{
+			self.navigationItem.rightBarButtonItem = nil;
+			_currentViewType = kDNDetailViewTypeComments;
+		}
+		
+		
+		if (_currentViewType == kDNDetailViewTypeComments) {
+			self.commentsBarButtonItem.tintColor = [UIColor lightGrayColor];
+			self.mainWebView.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
+		}else{
+			self.mainWebView.scrollView.decelerationRate = UIScrollViewDecelerationRateFast;
+			self.commentsBarButtonItem.tintColor = [UIColor colorWithRed:0.09 green:0.278 blue:0.69 alpha:1];
+		}
+
     }
+	
+	
+	
+}
+
+-(void) adjustCommentDesign
+{
+	NSError *error = nil;
+	NSURL * url = [NSURL URLWithString:@"http://flogehring.com/dn/comments.min.css"];
+	NSStringEncoding * encoding = nil;
+	NSString * cssContent = [NSString stringWithContentsOfURL:url usedEncoding:encoding error:&error];
+	
+//	cssContent = [cssContent s]
+	
+	NSString *jsString = @""
+	"$('head').append('<meta name=\"viewport\" content=\"width=device-width, initial-scale = 1, minimum-scale = 1, maximum-scale = 1\">');$('body').append('<style>";
+	jsString = [jsString stringByAppendingFormat:@"%@</style>');",cssContent];
+	
+	NSLog(@"%@", jsString);
+	//.append('<link rel=\"stylesheet\" href=\"http://flogehring.com/dn/comments.css\">');";
+	[self.mainWebView stringByEvaluatingJavaScriptFromString:jsString];
+	
+
 }
 
 #pragma mark -
@@ -327,8 +383,23 @@
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     
     self.navigationItem.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+	if (_currentViewType == kDNDetailViewTypeComments) {
+		[self adjustCommentDesign];
+	}
+	
+	
     [self updateToolbarItems];
 }
+
+-(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+	if (_currentViewType == kDNDetailViewTypeComments && navigationType == UIWebViewNavigationTypeLinkClicked ) {
+		return NO;
+	}else{
+		return YES;
+	}
+}
+
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
@@ -365,6 +436,19 @@
     else
 //        [self.pageActionSheet showFromToolbar:self.navigationController.toolbar];
 		 [self presentViewController:self.activityVC animated:YES completion:nil];
+}
+
+-(void)commentsButtonTapped:(id)sender
+{
+	NSLog(@"Show comments");
+	if (_currentViewType == kDNDetailViewTypeStory) {
+		[self loadURL:_detailItem.commentsURL];
+		_currentViewType = kDNDetailViewTypeComments;
+	}else{
+		[self loadURL:_detailItem.storyURL];
+		_currentViewType = kDNDetailViewTypeStory;
+	}
+
 }
 
 - (void)doneButtonClicked:(id)sender {
@@ -498,7 +582,7 @@
 
 - (void)shareButtonTapped:(id)sender {
 	
-	NSURL *shareURL = [NSURL URLWithString:self.detailItem.sourceURL];
+	NSURL *shareURL = self.detailItem.storyURL;
 	
 	NSString *textToShare = @"Look what I've found on DesignerNews… ";
 	NSArray *activityItems = @[textToShare, shareURL];
