@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TTTAttributedLabel.h"
 
 @interface DNCommentsCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *author;
 @property (weak, nonatomic) IBOutlet UILabel *timestamp;
-@property (weak, nonatomic) IBOutlet UILabel *comment;
+@property (weak, nonatomic) IBOutlet TTTAttributedLabel *comment;
 @property (weak, nonatomic) IBOutlet UILabel *points;
 
 @end

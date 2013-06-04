@@ -11,4 +11,5 @@
 @interface DNCommentPageModel : DNStory
 @property (nonatomic, strong) NSString *storyBody;
 @property (nonatomic, strong) NSArray *comments;
+-(id)initWithStory: (DNStory *) story;
 @end

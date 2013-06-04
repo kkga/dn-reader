@@ -11,5 +11,7 @@
 @interface DNCommentsHeaderView : UIView
 @property (weak, nonatomic) IBOutlet UILabel *title;
 @property (weak, nonatomic) IBOutlet UILabel *body;
+@property (weak, nonatomic) IBOutlet UILabel *timestamp;
+@property (weak, nonatomic) IBOutlet UILabel *username;
 
 @end

@@ -11,6 +11,7 @@
 #import "TUSafariActivity.h"
 #import "DNActivityProvider.h"
 #import "DNCommentsViewController.h"
+#import "SVProgressHUD.h"
 
 @interface DNDetailViewController () <UIWebViewDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
 
@@ -174,8 +175,7 @@
     _activityVC = [[UIActivityViewController alloc] initWithActivityItems: dataToShare applicationActivities:applicationActivities];
     
     [self.activityVC setExcludedActivityTypes:@[UIActivityTypePostToWeibo]];
-    
-    NSLog(@"Finished initializeing ActicityVC");
+
 }
 
 #pragma mark - View lifecycle
@@ -184,12 +184,12 @@
     mainWebView = [[UIWebView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     mainWebView.delegate = self;
     mainWebView.scalesPageToFit = YES;
-    [self loadURL:self.URL];
+    [self loadURL:self.story.storyURL];
     self.view = mainWebView;
 }
 
 - (void)viewDidLoad {
-	_currentViewType = kDNDetailViewTypeStory;
+//	_currentViewType = kDNDetailViewTypeStory;
 	[super viewDidLoad];
     [self updateToolbarItems];
 }
@@ -200,11 +200,11 @@
     
 	[super viewWillAppear:animated];
 	
-	if (_currentViewType == kDNDetailViewTypeStory) {
-		[self loadURL:self.story.storyURL];
-	}else{
-		[self loadURL:self.story.commentsURL];
-	}
+//	if (_currentViewType == kDNDetailViewTypeStory) {
+//		[self loadURL:self.story.storyURL];
+//	}else{
+//		[self loadURL:self.story.commentsURL];
+//	}
 	
 	
 	
@@ -227,7 +227,7 @@
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-	[self loadURL:[NSURL URLWithString:@"about:blank"]];
+//	[self loadURL:[NSURL URLWithString:@"about:blank"]];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
@@ -329,49 +329,18 @@
 		self.navigationController.toolbar.tintColor = self.navigationController.navigationBar.tintColor;
         self.toolbarItems = items;
 		
-		//Only show the switch button if there is a link
+		//Only show the comments button if there is a link
 		if ( ! [_story.commentsURL isEqual:_story.storyURL]) {
-//			self.navigationItem.rightBarButtonItem = self.commentsBarButtonItem;
+			self.navigationItem.rightBarButtonItem = self.commentsBarButtonItem;
 		}else{
-//			self.navigationItem.rightBarButtonItem = nil;
-//			_currentViewType = kDNDetailViewTypeComments;
+			self.navigationItem.rightBarButtonItem = nil;
+		}
 
-		}
-		self.navigationItem.rightBarButtonItem = self.commentsBarButtonItem;
-		
-		
-		if (_currentViewType == kDNDetailViewTypeComments) {
-			self.commentsBarButtonItem.tintColor = [UIColor lightGrayColor];
-			self.mainWebView.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
-		}else{
-			self.mainWebView.scrollView.decelerationRate = UIScrollViewDecelerationRateFast;
-			self.commentsBarButtonItem.tintColor = [UIColor colorWithRed:0.09 green:0.278 blue:0.69 alpha:1];
-		}
 
     }
 	
 	
 	
-}
-
--(void) adjustCommentDesign
-{
-	NSError *error = nil;
-	NSURL * url = [NSURL URLWithString:@"http://flogehring.com/dn/comments.min.css"];
-	NSStringEncoding * encoding = nil;
-	NSString * cssContent = [NSString stringWithContentsOfURL:url usedEncoding:encoding error:&error];
-	
-//	cssContent = [cssContent s]
-	
-	NSString *jsString = @""
-	"$('head').append('<meta name=\"viewport\" content=\"width=device-width, initial-scale = 1, minimum-scale = 1, maximum-scale = 1\">');$('body').append('<style>";
-	jsString = [jsString stringByAppendingFormat:@"%@</style>');",cssContent];
-	
-//	NSLog(@"%@", jsString);
-	//.append('<link rel=\"stylesheet\" href=\"http://flogehring.com/dn/comments.css\">');";
-	[self.mainWebView stringByEvaluatingJavaScriptFromString:jsString];
-	
-
 }
 
 #pragma mark -
@@ -387,23 +356,8 @@
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     
     self.navigationItem.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
-	if (_currentViewType == kDNDetailViewTypeComments) {
-		[self adjustCommentDesign];
-	}
-	
-	
-    [self updateToolbarItems];
+	[self updateToolbarItems];
 }
-
--(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-{
-	if (_currentViewType == kDNDetailViewTypeComments && navigationType == UIWebViewNavigationTypeLinkClicked ) {
-		return NO;
-	}else{
-		return YES;
-	}
-}
-
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
@@ -445,13 +399,8 @@
 -(void)commentsButtonTapped:(id)sender
 {
 	NSLog(@"Show comments");
-//	if (_currentViewType == kDNDetailViewTypeStory) {
-//		[self loadURL:_detailItem.commentsURL];
-//		_currentViewType = kDNDetailViewTypeComments;
-//	}else{
-//		[self loadURL:_detailItem.storyURL];
-//		_currentViewType = kDNDetailViewTypeStory;
-//	}
+
+	[SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
 	_commentsView = [[DNCommentsViewController alloc]init];
 	_commentsView.story = _story;
 
@@ -545,53 +494,6 @@
 }
 
 #pragma mark - Managing the detail item
-
-//- (void)setStory:(id)newDetailItem
-//{
-//    if (_story != newDetailItem) {
-//        _story = newDetailItem;
-//        
-//        // Update the view.
-////        [self configureView];
-//    }
-//}
-
-//- (void)configureView
-//{
-//    // Update the user interface for the detail item.
-//	if (self.detailItem) {
-//	    self.title = self.detailItem.storyTitle;
-//		self.webview.scalesPageToFit = YES;
-//
-//	}
-//	
-//	
-//}
-
-
-
-
-//-(void)loadPage
-//{
-//	if (self.detailItem) {
-//		
-//		NSString *urlString = self.detailItem.sourceURL;
-//		if (![urlString hasPrefix:@"http://"] &&  ![urlString hasPrefix:@"https://"]) {
-//			if ([urlString hasPrefix:@"/stories/"]) {
-//				urlString = [NSString stringWithFormat:@"https://news.layervault.com%@", urlString];
-//			}else{
-//				urlString = @"https://news.layervault.com/404";
-//			}
-//
-//		}
-//		
-//		NSURL *url = [[NSURL alloc] initWithString:self.detailItem.sourceURL];
-//		NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
-//		
-//		[self.webview loadRequest:requestObj];
-//		
-//	}
-//}
 
 - (void)shareButtonTapped:(id)sender {
 	

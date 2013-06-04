@@ -59,6 +59,10 @@
 		D8AC8F98175DE95000F36731 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D8AC8F94175DE95000F36731 /* SVProgressHUD.bundle */; };
 		D8AC8F99175DE95000F36731 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AC8F96175DE95000F36731 /* SVProgressHUD.m */; };
 		D8AC8F9A175DE95000F36731 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AC8F96175DE95000F36731 /* SVProgressHUD.m */; };
+		D8AC8FA2175E054300F36731 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AC8F9F175E054300F36731 /* TTTAttributedLabel.m */; };
+		D8AC8FA3175E054300F36731 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AC8F9F175E054300F36731 /* TTTAttributedLabel.m */; };
+		D8AC8FA6175E074900F36731 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8AC8FA5175E074900F36731 /* CoreText.framework */; };
+		D8AC8FA7175E075400F36731 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8AC8FA5175E074900F36731 /* CoreText.framework */; };
 		D8C73E061753E54C00275EC2 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8C73E041753E54C00275EC2 /* libTestFlight.a */; };
 		D8C73E361753E69500275EC2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D85DDA5A1753A1C20006E2AB /* main.m */; };
 		D8C73E371753E69500275EC2 /* DNAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D85DDA5E1753A1C20006E2AB /* DNAppDelegate.m */; };
@@ -189,6 +193,9 @@
 		D8AC8F94175DE95000F36731 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
 		D8AC8F95175DE95000F36731 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		D8AC8F96175DE95000F36731 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		D8AC8F9E175E054300F36731 /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTTAttributedLabel.h; path = TTTAttributedLabel/TTTAttributedLabel.h; sourceTree = "<group>"; };
+		D8AC8F9F175E054300F36731 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTTAttributedLabel.m; path = TTTAttributedLabel/TTTAttributedLabel.m; sourceTree = "<group>"; };
+		D8AC8FA5175E074900F36731 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		D8C73E041753E54C00275EC2 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		D8C73E051753E54C00275EC2 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		D8C73E4F1753E69500275EC2 /* DNReader α.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DNReader α.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -254,6 +261,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8AC8FA6175E074900F36731 /* CoreText.framework in Frameworks */,
 				D8EA5CFC175CB659001039B5 /* CoreImage.framework in Frameworks */,
 				D8FF79291754ECB3004A8C7E /* QuartzCore.framework in Frameworks */,
 				D8FF78E31754853B004A8C7E /* MessageUI.framework in Frameworks */,
@@ -269,6 +277,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8AC8FA7175E075400F36731 /* CoreText.framework in Frameworks */,
 				D8EA5CFD175CB660001039B5 /* CoreImage.framework in Frameworks */,
 				D8FF792A1754ECB8004A8C7E /* QuartzCore.framework in Frameworks */,
 				D8FF78E217548534004A8C7E /* MessageUI.framework in Frameworks */,
@@ -287,19 +296,15 @@
 		D80788E017589D5900087F1D /* Comments */ = {
 			isa = PBXGroup;
 			children = (
+				D80788DB17589D5400087F1D /* DNCommentsViewController.xib */,
 				D80788D917589D5400087F1D /* DNCommentsViewController.h */,
 				D80788DA17589D5400087F1D /* DNCommentsViewController.m */,
 				D80788F61758C0EC00087F1D /* DNCommentsHeaderView.h */,
 				D80788F71758C0EC00087F1D /* DNCommentsHeaderView.m */,
 				D80788FA1758C10100087F1D /* DNCommentsHeaderView.xib */,
-				D80788DB17589D5400087F1D /* DNCommentsViewController.xib */,
 				D80788E117589D7200087F1D /* DNCommentsCell.h */,
 				D80788E217589D7200087F1D /* DNCommentsCell.m */,
 				D80788E517589D8700087F1D /* DNCommentsCell.xib */,
-				D80788EE1758A7A000087F1D /* DNCommentModel.h */,
-				D80788EF1758A7A100087F1D /* DNCommentModel.m */,
-				D80788F21758A8BB00087F1D /* DNCommentPageModel.h */,
-				D80788F31758A8BB00087F1D /* DNCommentPageModel.m */,
 			);
 			name = Comments;
 			sourceTree = "<group>";
@@ -321,8 +326,6 @@
 			children = (
 				D80788E91758A5AA00087F1D /* DNCrawler.h */,
 				D80788EA1758A5AA00087F1D /* DNCrawler.m */,
-				D8AC8F7C175DCBA800F36731 /* DNList.h */,
-				D8AC8F7D175DCBA800F36731 /* DNList.m */,
 			);
 			name = Crawler;
 			sourceTree = "<group>";
@@ -330,8 +333,6 @@
 		D85DDA421753A1C10006E2AB = {
 			isa = PBXGroup;
 			children = (
-				D8EA5CFB175CB659001039B5 /* CoreImage.framework */,
-				D8FF79281754ECB3004A8C7E /* QuartzCore.framework */,
 				D8FF79261754E9CB004A8C7E /* DNRIcon alpha@2x.png */,
 				D8FF79241754E9C6004A8C7E /* DNRIcon alpha.png */,
 				D8C73E561753EE3000275EC2 /* DNRIcon@2x.png */,
@@ -355,6 +356,9 @@
 		D85DDA4D1753A1C20006E2AB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D8AC8FA5175E074900F36731 /* CoreText.framework */,
+				D8EA5CFB175CB659001039B5 /* CoreImage.framework */,
+				D8FF79281754ECB3004A8C7E /* QuartzCore.framework */,
 				D8FF78E117548534004A8C7E /* MessageUI.framework */,
 				D85DDA811753A3940006E2AB /* libxml2.dylib */,
 				D8C73E511753E96300275EC2 /* libz.dylib */,
@@ -371,14 +375,14 @@
 				D8C73E531753EE0600275EC2 /* assets */,
 				D85DDA5D1753A1C20006E2AB /* DNAppDelegate.h */,
 				D85DDA5E1753A1C20006E2AB /* DNAppDelegate.m */,
-				D8AC8F92175DDA1000F36731 /* List */,
 				D8EA5CF2175C81B7001039B5 /* Menu */,
 				D80788ED1758A76900087F1D /* Crawler */,
-				D80788E017589D5900087F1D /* Comments */,
+				D8AC8F92175DDA1000F36731 /* List */,
 				D80788E81758A45F00087F1D /* Detail */,
-				D85DDA7E1753A2A30006E2AB /* DNStory.h */,
-				D85DDA7F1753A2A30006E2AB /* DNStory.m */,
+				D80788E017589D5900087F1D /* Comments */,
+				D8AC8F9B175DFF2500F36731 /* Models */,
 				D8C73E051753E54C00275EC2 /* TestFlight.h */,
+				D8AC8FA4175E054800F36731 /* TTTAttributedLabel */,
 				D8AC8F93175DE95000F36731 /* SVProgressHUD */,
 				D8FF78D217548151004A8C7E /* HTMLParser */,
 				D8FF791D1754C1DF004A8C7E /* DNActivityHandler */,
@@ -424,6 +428,30 @@
 			);
 			name = SVProgressHUD;
 			path = SVProgressHUD/SVProgressHUD;
+			sourceTree = "<group>";
+		};
+		D8AC8F9B175DFF2500F36731 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D8AC8F7C175DCBA800F36731 /* DNList.h */,
+				D8AC8F7D175DCBA800F36731 /* DNList.m */,
+				D80788EE1758A7A000087F1D /* DNCommentModel.h */,
+				D80788EF1758A7A100087F1D /* DNCommentModel.m */,
+				D80788F21758A8BB00087F1D /* DNCommentPageModel.h */,
+				D80788F31758A8BB00087F1D /* DNCommentPageModel.m */,
+				D85DDA7E1753A2A30006E2AB /* DNStory.h */,
+				D85DDA7F1753A2A30006E2AB /* DNStory.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		D8AC8FA4175E054800F36731 /* TTTAttributedLabel */ = {
+			isa = PBXGroup;
+			children = (
+				D8AC8F9E175E054300F36731 /* TTTAttributedLabel.h */,
+				D8AC8F9F175E054300F36731 /* TTTAttributedLabel.m */,
+			);
+			name = TTTAttributedLabel;
 			sourceTree = "<group>";
 		};
 		D8C73E531753EE0600275EC2 /* assets */ = {
@@ -696,6 +724,7 @@
 				D8EA5CF9175CB59B001039B5 /* UIImage+Blur.m in Sources */,
 				D8AC8F7E175DCBA800F36731 /* DNList.m in Sources */,
 				D8AC8F99175DE95000F36731 /* SVProgressHUD.m in Sources */,
+				D8AC8FA2175E054300F36731 /* TTTAttributedLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -725,6 +754,7 @@
 				D8EA5CFA175CB59B001039B5 /* UIImage+Blur.m in Sources */,
 				D8AC8F7F175DCBA800F36731 /* DNList.m in Sources */,
 				D8AC8F9A175DE95000F36731 /* SVProgressHUD.m in Sources */,
+				D8AC8FA3175E054300F36731 /* TTTAttributedLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

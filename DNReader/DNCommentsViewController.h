@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "DNStory.h"
-@interface DNCommentsViewController : UITableViewController
+#import "TTTAttributedLabel.h"
+@interface DNCommentsViewController : UITableViewController <TTTAttributedLabelDelegate>
 @property (strong, nonatomic) DNStory *story;
+
 @end

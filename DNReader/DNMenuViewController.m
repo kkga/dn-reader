@@ -31,10 +31,6 @@
 {
     [super viewDidLoad];
 
-//	UIBarButtonItem *closeButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(close)];
-//	self.navigationItem.rightBarButtonItem = closeButton;
-	
-	
 	self.view.backgroundColor = [UIColor clearColor];
 	
 	_checkedIndexPath = [NSIndexPath indexPathForRow:[[DNList sharedInstance] currentList] inSection:0];
@@ -185,13 +181,16 @@
 //	_tableView.transform = CGAffineTransformMakeTranslation(0, scrollOffset - list.frame.size.height );
 //	[self.delegate.view  addSubview:list];
 	
+
+	
 	[UIView animateWithDuration:.2
 						  delay:.1
 						options:UIViewAnimationOptionCurveEaseIn
 					 animations:^() {
 						 
 						 _tableView.transform = CGAffineTransformMakeTranslation(0, -_tableView.frame.size.height);
-						 self.view.backgroundColor = [UIColor whiteColor];
+						
+
 					 } completion:^(BOOL success){
 						[self dismissViewControllerAnimated:NO completion:nil];
 					 }];

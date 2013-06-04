@@ -62,9 +62,10 @@ NSString * const kURLSuffixPopular = @"p/";
 	}
 	
 	HTMLNode *bodyNode = [parser body];
+	bodyNode = [bodyNode findChildOfClass:@"InnerPage"];
 	
 	
-	NSArray *listItems = [bodyNode findChildrenOfClass:@"Story "];
+	NSArray *listItems = [bodyNode findChildTags:@"li"];
 	NSLog(@"%i", [listItems count]);
 	
 	for (HTMLNode *li in listItems) {
@@ -88,14 +89,14 @@ NSString * const kURLSuffixPopular = @"p/";
 
 -(DNCommentPageModel *)commentsForStory:(DNStory *)story
 {
-	DNCommentPageModel *commentsPage = [[DNCommentPageModel alloc]init];
-	
+	DNCommentPageModel *commentsPage = [[DNCommentPageModel alloc]initWithStory:story];
+
 	
 	NSError *error = nil;
 	NSLog(@"%@", story.commentsURL);
 	NSStringEncoding * encoding = nil;
 	NSString * htmlContent = [NSString stringWithContentsOfURL:story.commentsURL usedEncoding:encoding error:&error];
-	
+	htmlContent = [htmlContent stringByReplacingOccurrencesOfString:@"<br />" withString:@"\n"];
 	
 	HTMLParser *parser = [[HTMLParser alloc] initWithString:htmlContent error:&error];
 	
@@ -129,6 +130,11 @@ NSString * const kURLSuffixPopular = @"p/";
 //		[paragraphs removeObjectAtIndex:0];
 		comment.content = [self concatParagraphs:paragraphs];
 		
+		NSString *nestingLevel = [div className];
+		nestingLevel = [nestingLevel substringFromIndex:8];
+		comment.nestingLevel = [[nestingLevel substringFromIndex:12] integerValue];
+//		NSLog(@"%@, %@, %i", nestingLevel, [nestingLevel substringFromIndex:12], [[nestingLevel substringFromIndex:12] integerValue]);
+		
 
 		[comments addObject:comment];
 	}
@@ -143,7 +149,13 @@ NSString * const kURLSuffixPopular = @"p/";
 	NSString *sum = @"";
 	for (HTMLNode *p in pNodes) {
 		if ([[p contents] length] > 1) {
-			sum = [sum stringByAppendingFormat:@"%@\n", [p contents]];
+			sum = [sum stringByAppendingFormat:@"%@ \n", [p contents]];
+		}
+		NSArray *links = [p findChildTags:@"a"];
+		for (HTMLNode *a in links) {
+			if ( ! [[a className] isEqual:@"ReplyLink"]) {
+				sum = [sum stringByAppendingFormat:@"%@ \n", [a contents]];
+			}
 		}
 
 	}

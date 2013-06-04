@@ -101,7 +101,7 @@
 	if ([[[self.delegate.navigationController viewControllers] objectAtIndex:0] class] != [DNMenuViewController class]) {
 		
 		//Take a screenshot for the "transparent" background of the menu
-
+		((DNMasterViewController *)self.delegate).allowSelection = NO;
 		DNMenuViewController *menuVC = [[DNMenuViewController alloc]init];
 		UITableView *list = menuVC.tableView;
 
@@ -146,22 +146,16 @@
 									 UINavigationController *navC = [[UINavigationController alloc]initWithRootViewController:menuVC];
 										[self.delegate presentViewController:navC animated:NO completion:^(){
 											[[self.delegate.view viewWithTag:1] removeFromSuperview];
+											((DNMasterViewController *)self.delegate).allowSelection = YES;
 											[self setPressed:NO];
 										}];
 								 }];
 				});
 		});
 
-		
-
 	}else{
 		[(DNMenuViewController *)self.delegate close];
 	}
-	
-
-
-	
-	
 }
 
 /*

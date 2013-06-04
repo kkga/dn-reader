@@ -11,11 +11,14 @@
 #import "DNCrawler.h"
 #import "DNCommentsHeaderView.h"
 #import "SVProgressHUD.h"
+#import "DNDetailViewController.h"
+
 @interface DNCommentsViewController ()
 @property (nonatomic, strong) DNCommentPageModel *data;
+@property (nonatomic, strong) DNCommentsHeaderView *headerView;
 @end
 
-@implementation DNCommentsViewController
+@implementation DNCommentsViewController 
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -33,29 +36,34 @@
 	
 	[self.tableView registerNib:[UINib nibWithNibName:@"DNCommentsCell" bundle:nil] forCellReuseIdentifier:@"DNCommentsCell"];
 	
-	_data = [[DNCrawler sharedInstance] commentsForStory:_story];
+//	_data = [[DNCrawler sharedInstance] commentsForStory:_story];
 	
-	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(closeCommentsView:)];
-	
-	
-	CGSize bodySize = [_data.storyBody sizeWithFont:[UIFont fontWithName:@"HelveticaNeue" size:14] constrainedToSize:CGSizeMake(self.view.frame.size.width - 50, 9999) lineBreakMode:NSLineBreakByWordWrapping];
-	CGSize titleSize = [_story.storyTitle sizeWithFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:17] constrainedToSize:CGSizeMake(self.view.frame.size.width - 50, 9999) lineBreakMode:NSLineBreakByWordWrapping];
-	float headerHeight = titleSize.height + bodySize.height + 60;
-	
-	DNCommentsHeaderView *header = [[DNCommentsHeaderView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, headerHeight)];
-	header.title.text = _story.storyTitle;
-	header.body.text = _data.storyBody;
-	
-	self.tableView.tableHeaderView = header;
+	if ( ! [_story.storyURL isEqual:_story.commentsURL]) {
+		self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(closeCommentsView:)];
+	}
 	
 	[self refreshComments];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
 }
 
+-(DNCommentsHeaderView *)headerView
+{
+	if (!_headerView) {
+		CGSize bodySize = [_data.storyBody sizeWithFont:[UIFont fontWithName:@"HelveticaNeue" size:14] constrainedToSize:CGSizeMake(self.view.frame.size.width - 50, 9999) lineBreakMode:NSLineBreakByWordWrapping];
+		CGSize titleSize = [_story.storyTitle sizeWithFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:17] constrainedToSize:CGSizeMake(self.view.frame.size.width - 50, 9999) lineBreakMode:NSLineBreakByWordWrapping];
+		float headerHeight = titleSize.height + bodySize.height + 60;
+		
+		_headerView = [[DNCommentsHeaderView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, headerHeight)];
+		
+//		_headerView = [[[NSBundle mainBundle] loadNibNamed:@"DNCommentsHeaderView" owner:_headerView options:nil] objectAtIndex:0];
+	}
+	_headerView.title.text = _story.storyTitle;
+	_headerView.body.text = _data.storyBody;
+	_headerView.username.text = _story.username;
+	_headerView.timestamp.text = _story.timestamp;
+	
+	return _headerView;
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -86,7 +94,7 @@
 	CGSize size = [[[_data.comments objectAtIndex:indexPath.row] content]  sizeWithFont:[UIFont fontWithName:@"HelveticaNeue" size:14] constrainedToSize:CGSizeMake(self.view.frame.size.width - 40, 9999) lineBreakMode:NSLineBreakByWordWrapping];
 	
 //	NSLog(@"CellHeight: %.f", size.height);
-	return size.height + 70;
+	return size.height + 60;
 }
 
 
@@ -102,12 +110,29 @@
 	DNCommentModel *comment = [_data.comments objectAtIndex:indexPath.row];
 	cell.author.text = comment.author;
 	cell.timestamp.text = comment.time;
-	cell.comment.text = comment.content;
+
 	cell.points.text = comment.numberOfPoints;
+	
+	cell.comment.dataDetectorTypes = UIDataDetectorTypeAll;
+	cell.comment.delegate = self;
+	cell.comment.text = comment.content;
+	
 //	[cell.comment sizeToFit];
 //	cell.comment.backgroundColor = [UIColor lightGrayColor];
 	
     return cell;
+}
+
+-(void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url
+{
+	DNStory *shareable = [[DNStory alloc]init];
+	shareable.storyURL = url;
+	shareable.commentsURL = url;
+	shareable.storyTitle = @"This was linked to on DesignerNews";
+	
+	DNDetailViewController *browser = [[DNDetailViewController alloc]initWithURL:url];
+	browser.story = shareable;
+	[self.navigationController pushViewController:browser animated:YES];
 }
 
 /*
@@ -170,7 +195,6 @@
 
 -(void)refreshComments
 {	
-	[self.refreshControl beginRefreshing];
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 	[SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
 	
@@ -178,15 +202,18 @@
 		
 		_data = [[DNCrawler sharedInstance]commentsForStory:_story];
 		
-		self.navigationItem.title = _data.numberOfComments;
+		
 		
 		dispatch_sync(dispatch_get_main_queue(), ^(void) {
 			
-			NSLog(@"Done");
+			NSLog(@"Done – %@", _data.numberOfComments);
+			
 			[SVProgressHUD dismiss];
 			[self.tableView reloadData];
 			[self.refreshControl endRefreshing];
 			[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+			self.navigationItem.title = _data.numberOfComments;
+			self.tableView.tableHeaderView = self.headerView;
 			
 		});
 	});

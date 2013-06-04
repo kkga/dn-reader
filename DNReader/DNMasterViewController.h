@@ -14,8 +14,7 @@
 
 
 @interface DNMasterViewController : UITableViewController <UIScrollViewDelegate>
-
-@property (strong, nonatomic) DNDetailViewController *detailViewController;
 @property (nonatomic) DNStoryListType currentList;
+@property (nonatomic) BOOL allowSelection;
 
 @end

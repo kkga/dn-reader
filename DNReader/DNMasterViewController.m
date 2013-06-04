@@ -14,6 +14,7 @@
 #import "DNCell.h"
 #import "DNNavSelector.h"
 #import "SVProgressHUD.h"
+#import "DNCommentsViewController.h"
 #import <QuartzCore/QuartzCore.h>
 @interface DNMasterViewController () {
 
@@ -35,7 +36,7 @@
 		_titleView = [[DNNavSelector alloc]initWithTitle:[[DNList sharedInstance] currentListTitle]];
 		_titleView.delegate = self;
 		self.navigationItem.titleView = _titleView;
-		
+		_allowSelection = YES;
     }
     return self;
 }
@@ -63,13 +64,11 @@
 	
 	[self.tableView registerNib:[UINib nibWithNibName:@"DNCell" bundle:nil] forCellReuseIdentifier:@"DNCell"];
 	
-//	UISwipeGestureRecognizer *swiper = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(switchList)];
-//	[self.navigationController.navigationBar addGestureRecognizer:swiper];
-
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
+	[_titleView setPressed:NO];
 	[self updateListSelection];
 	
 }
@@ -99,18 +98,7 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
-
-//- (void)insertNewObject:(id)sender
-//{
-//    if (!_objects) {
-//        _objects = [[NSMutableArray alloc] init];
-//    }
-//    [_objects insertObject:[NSDate date] atIndex:0];
-//    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-//    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-//}
 
 #pragma mark - Table View
 
@@ -131,7 +119,7 @@
 	return size.height + 60;
 }
 
-// Customize the appearance of table view cells.
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"DNCell";
@@ -139,7 +127,6 @@
     DNCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[DNCell alloc] init];
-//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
 
 	DNStory *story = [_stories objectAtIndex:indexPath.row];
@@ -183,7 +170,6 @@
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
     return NO;
 }
 
@@ -197,31 +183,23 @@
 //    }
 }
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	DNStory *currentStory = [_stories objectAtIndex:indexPath.row];
-    if (!self.detailViewController) {
-        self.detailViewController = [[DNDetailViewController alloc] initWithAddress:@"about:blank"];
-    }
 	
-    self.detailViewController.story = currentStory;
-    [self.navigationController pushViewController:self.detailViewController animated:YES];
+	if (_allowSelection) {
+		DNStory *currentStory = [_stories objectAtIndex:indexPath.row];
+		if ([currentStory.commentsURL isEqual:currentStory.storyURL]) {
+			DNCommentsViewController *commentsView = [[DNCommentsViewController alloc]initWithNibName:nil bundle:nil];
+			commentsView.story = currentStory;
+			[self.navigationController pushViewController:commentsView animated:YES];
+		}else{
+			DNDetailViewController *detailViewController = [[DNDetailViewController alloc] initWithURL:currentStory.storyURL];
+			detailViewController.story = currentStory;
+			[self.navigationController pushViewController:detailViewController animated:YES];
+			
+		}
+	}
 }
 
 
@@ -230,7 +208,7 @@
 {
 	[self.refreshControl beginRefreshing];
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-	[SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+
 	
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^(void) {
 	
