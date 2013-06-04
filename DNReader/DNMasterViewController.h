@@ -7,14 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "DNCrawler.h"
+#import "DNList.h"
 @class DNDetailViewController;
 
-typedef enum {
-    kDNStoryListTypePopular,
-    kDNStoryListTypeRecent
-    
-} DNStoryListType;
+
 
 @interface DNMasterViewController : UITableViewController <UIScrollViewDelegate>
 

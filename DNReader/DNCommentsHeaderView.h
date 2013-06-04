@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface DNCommentsHeaderView : UIView
+@property (weak, nonatomic) IBOutlet UILabel *title;
+@property (weak, nonatomic) IBOutlet UILabel *body;
 
 @end

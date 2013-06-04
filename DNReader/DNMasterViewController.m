@@ -8,15 +8,18 @@
 
 
 #import "DNMasterViewController.h"
-#import "HTMLParser.h"
+#import "DNCrawler.h"
 #import "DNStory.h"
 #import "DNDetailViewController.h"
 #import "DNCell.h"
+#import "DNNavSelector.h"
+#import "SVProgressHUD.h"
 #import <QuartzCore/QuartzCore.h>
 @interface DNMasterViewController () {
 
 }
 @property (nonatomic, strong) NSMutableArray *stories;
+@property (nonatomic, strong) DNNavSelector *titleView;
 @property (nonatomic) int pagesLoaded;
 @end
 
@@ -29,8 +32,9 @@
 		self.title = @"DN – Popular";
 		_pagesLoaded = 1;
 		_stories = [[NSMutableArray alloc]init];
-		
-		
+		_titleView = [[DNNavSelector alloc]initWithTitle:[[DNList sharedInstance] currentListTitle]];
+		_titleView.delegate = self;
+		self.navigationItem.titleView = _titleView;
 		
     }
     return self;
@@ -59,9 +63,15 @@
 	
 	[self.tableView registerNib:[UINib nibWithNibName:@"DNCell" bundle:nil] forCellReuseIdentifier:@"DNCell"];
 	
-	UISwipeGestureRecognizer *swiper = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(switchList)];
-	[self.navigationController.navigationBar addGestureRecognizer:swiper];
+//	UISwipeGestureRecognizer *swiper = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(switchList)];
+//	[self.navigationController.navigationBar addGestureRecognizer:swiper];
 
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+	[self updateListSelection];
+	
 }
 
 
@@ -73,19 +83,18 @@
 	[self refreshForPage:1];
 }
 
--(void)switchList
+-(void)updateListSelection
 {
-	NSLog(@"Switch the list");
-	if (_currentList == kDNStoryListTypePopular) {
-		_currentList = kDNStoryListTypeRecent;
-		self.title = @"DN – Recent";
-	}else{
-		_currentList = kDNStoryListTypePopular;
-		self.title = @"DN – Popular";
+	if(_currentList != [[DNList sharedInstance]currentList]){
+		_currentList = [[DNList sharedInstance]currentList];
+		self.title = [[DNList sharedInstance] currentListTitle];
+		[self.titleView.titleButton setTitle: [[DNList sharedInstance]currentListTitle] forState:UIControlStateNormal];
+		[_stories removeAllObjects];
+		[self.tableView reloadData];
+		[self refreshPulled];
 	}
-	
-	[self refreshPulled];
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -117,7 +126,9 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	return 115;
+	CGSize size = [[[_stories objectAtIndex:indexPath.row] storyTitle] sizeWithFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:17] constrainedToSize:CGSizeMake(self.view.frame.size.width - 50, 9999) lineBreakMode:NSLineBreakByWordWrapping];
+	
+	return size.height + 60;
 }
 
 // Customize the appearance of table view cells.
@@ -134,6 +145,7 @@
 	DNStory *story = [_stories objectAtIndex:indexPath.row];
 
 	cell.storyTitle.text = story.storyTitle;
+	[cell.storyTitle sizeToFit];
 	
 	if (story.domain) {
 		cell.domain.text = [NSString stringWithFormat:@"∙ %@",story.domain];
@@ -147,14 +159,14 @@
 		cell.username.text = @"";
 	}
 	
-	if (story.points) {
-		cell.points.text = story.points;
+	if (story.numberOfPoints) {
+		cell.points.text = story.numberOfPoints;
 	}else{
 		cell.points.text = @"";
 	}
 	
-	if (story.comments) {
-		cell.comments.text = [NSString stringWithFormat:@"∙ %@",story.comments];
+	if (story.numberOfComments) {
+		cell.comments.text = [NSString stringWithFormat:@"∙ %@",story.numberOfComments];
 	}else{
 		cell.comments.text = @"";
 	}
@@ -177,12 +189,12 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [_stories removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+//    if (editingStyle == UITableViewCellEditingStyleDelete) {
+//        [_stories removeObjectAtIndex:indexPath.row];
+//        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-    }
+//    }
 }
 
 /*
@@ -203,12 +215,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	DNStory *story = [_stories objectAtIndex:indexPath.row];
+	DNStory *currentStory = [_stories objectAtIndex:indexPath.row];
     if (!self.detailViewController) {
         self.detailViewController = [[DNDetailViewController alloc] initWithAddress:@"about:blank"];
     }
 	
-    self.detailViewController.detailItem = story;
+    self.detailViewController.story = currentStory;
     [self.navigationController pushViewController:self.detailViewController animated:YES];
 }
 
@@ -218,58 +230,19 @@
 {
 	[self.refreshControl beginRefreshing];
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-
+	[SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
 	
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^(void) {
 	
-		NSError *error = nil;
-		NSString *urlString = @"https://news.layervault.com/";
-		
-		if (_currentList == kDNStoryListTypeRecent)
-			urlString = [urlString stringByAppendingString:@"new/"];
-		if(_currentList == kDNStoryListTypePopular)
-			urlString = [urlString stringByAppendingString:@"p/"];
-		
+		NSArray *newStories = [[DNCrawler sharedInstance] storiesOfType:_currentList forPage:pageNumber];
 		
 		if (pageNumber == 1) {
-			[_stories removeAllObjects];
-		}
-		urlString = [urlString stringByAppendingFormat:@"%i",pageNumber];
-		
-		NSLog(@"%@", urlString);
-		NSURL * url = [NSURL URLWithString:urlString];
-		NSStringEncoding * encoding = nil;
-		NSString * htmlContent = [NSString stringWithContentsOfURL:url usedEncoding:encoding error:&error];
-		
-		
-		HTMLParser *parser = [[HTMLParser alloc] initWithString:htmlContent error:&error];
-		
-		if (error) {
-			NSLog(@"Error: %@", error);
-			return;
+			_stories = [newStories mutableCopy];
+		}else{
+			[_stories addObjectsFromArray:newStories];
 		}
 		
-		HTMLNode *bodyNode = [parser body];
-		
-		
-		NSArray *listItems = [bodyNode findChildrenOfClass:@"Story"];
-		NSLog(@"%i", [listItems count]);
-		
-		for (HTMLNode *li in listItems) {
-			DNStory *story = [DNStory new];
-			[story setStoryURLFromString:[[li findChildOfClass:@"StoryUrl"] getAttributeNamed:@"href"]];
-			story.storyTitle = [[li findChildOfClass:@"StoryUrl"] contents];
-			story.username = [[li findChildOfClass:@"Submitter"] contents];
-			story.domain = [[li findChildOfClass:@"Domain"] contents];
-			story.points = [[li findChildOfClass:@"PointCount"]contents];
-			story.timestamp = [[li findChildOfClass:@"Timeago"] contents];
-			
-			HTMLNode *commentsLink = [li findChildOfClass:@"CommentCount"];
-			[story setCommentsURLFromString:[commentsLink getAttributeNamed:@"href"]];
-			story.comments = [commentsLink contents];
-			
-			[_stories addObject:story];
-		}
+
 		
 		NSLog(@"%i stories", [_stories count]);
 		_pagesLoaded++;
@@ -279,6 +252,7 @@
 			NSLog(@"Done");
 			[self.tableView reloadData];
 			[self.refreshControl endRefreshing];
+			[SVProgressHUD dismiss];
 			[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 		
 		});

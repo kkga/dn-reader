@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Flo Gehring. All rights reserved.
 //
 
-#import "DNCommentsModel.h"
+#import "DNCommentModel.h"
 
-@implementation DNCommentsModel
+@implementation DNCommentModel
 
 @end

@@ -28,7 +28,7 @@ typedef enum {
 @interface DNDetailViewController : UIViewController
 
 @property (nonatomic, readwrite) SVWebViewControllerAvailableActions availableActions;
-@property (strong, nonatomic) DNStory *detailItem;
+@property (strong, nonatomic) DNStory *story;
 
 
 - (id)initWithAddress:(NSString*)urlString;

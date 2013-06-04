@@ -21,8 +21,8 @@ typedef enum {
 @property (nonatomic, strong) NSString *storyTitle;
 @property (nonatomic, strong) NSString *username;
 @property (nonatomic, strong) NSString *timestamp;
-@property (nonatomic, strong) NSString *points;
-@property (nonatomic, strong) NSString *comments;
+@property (nonatomic, strong) NSString *numberOfPoints;
+@property (nonatomic, strong) NSString *numberOfComments;
 @property (nonatomic, strong) NSString *domain;
 
 -(void)setStoryURLFromString:(NSString *)relativeStoryURLString;

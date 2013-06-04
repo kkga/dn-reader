@@ -7,7 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DNStory.h"
+#import "DNCommentPageModel.h"
+#import "DNCommentModel.h"
+#import "DNList.h"
+
 
 @interface DNCrawler : NSObject
 
++(instancetype) sharedInstance;
+
+-(NSArray *) storiesOfType:(DNStoryListType)listType forPage:(int) pageNumber;
+-(DNCommentPageModel *) commentsForStory:(DNStory *)story;
 @end

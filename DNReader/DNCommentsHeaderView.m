@@ -14,7 +14,9 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        self = [[[NSBundle mainBundle] loadNibNamed:@"DNCommentsHeaderView" owner:self options:nil] objectAtIndex:0];
+		self.frame = frame;
+//        [self addSubview:self.view];
     }
     return self;
 }

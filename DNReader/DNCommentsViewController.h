@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "DNStory.h"
 @interface DNCommentsViewController : UITableViewController
-
+@property (strong, nonatomic) DNStory *story;
 @end

@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DNCommentsModel : NSObject
-
+@interface DNCommentModel : NSObject
+@property (nonatomic, strong) NSString *author;
+@property (nonatomic, strong) NSString *time;
+@property (nonatomic, strong) NSString *iconPath;
+@property (nonatomic, strong) NSString *profilePath;
+@property (nonatomic, strong) NSString *numberOfPoints;
+@property (nonatomic, strong) NSString *content;
+@property (nonatomic) int nestingLevel;
 @end

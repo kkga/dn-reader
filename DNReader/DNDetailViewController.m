@@ -10,6 +10,7 @@
 #import "ARChromeActivity.h"
 #import "TUSafariActivity.h"
 #import "DNActivityProvider.h"
+#import "DNCommentsViewController.h"
 
 @interface DNDetailViewController () <UIWebViewDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
 
@@ -20,6 +21,7 @@
 @property (nonatomic, strong, readonly) UIBarButtonItem *actionBarButtonItem;
 @property (nonatomic, strong, readonly) UIBarButtonItem *commentsBarButtonItem;
 @property (nonatomic, strong, readonly) UIActionSheet *pageActionSheet;
+@property (nonatomic, strong, readonly) DNCommentsViewController *commentsView;
 
 @property (nonatomic, strong) UIWebView *mainWebView;
 @property (nonatomic, strong) NSURL *URL;
@@ -62,7 +64,7 @@
 -(UIBarButtonItem *)commentsBarButtonItem
 {
 	if (!commentsBarButtonItem) {
-        commentsBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(commentsButtonTapped:)];
+        commentsBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Comments" style:UIBarButtonItemStylePlain target:self action:@selector(commentsButtonTapped:)];
 //        commentsBarButtonItem.imageInsets = UIEdgeInsetsMake(2.0f, 0.0f, -2.0f, 0.0f);
 //		commentsBarButtonItem.width = 18.0f;
     }
@@ -163,9 +165,9 @@
     TUSafariActivity *safariActivity = [[TUSafariActivity alloc] init];
     
 	DNActivityProvider *actProvider = [[DNActivityProvider alloc] init];
-	[actProvider setStory:self.detailItem];
+	[actProvider setStory:self.story];
 	
-	NSArray* dataToShare = @[actProvider, self.detailItem.storyURL];
+	NSArray* dataToShare = @[actProvider, self.story.storyURL];
 	
     NSArray *applicationActivities = @[safariActivity, chromeActivity];
     
@@ -199,9 +201,9 @@
 	[super viewWillAppear:animated];
 	
 	if (_currentViewType == kDNDetailViewTypeStory) {
-		[self loadURL:self.detailItem.storyURL];
+		[self loadURL:self.story.storyURL];
 	}else{
-		[self loadURL:self.detailItem.commentsURL];
+		[self loadURL:self.story.commentsURL];
 	}
 	
 	
@@ -328,12 +330,14 @@
         self.toolbarItems = items;
 		
 		//Only show the switch button if there is a link
-		if ( ! [_detailItem.commentsURL isEqual:_detailItem.storyURL]) {
-			self.navigationItem.rightBarButtonItem = self.commentsBarButtonItem;
+		if ( ! [_story.commentsURL isEqual:_story.storyURL]) {
+//			self.navigationItem.rightBarButtonItem = self.commentsBarButtonItem;
 		}else{
-			self.navigationItem.rightBarButtonItem = nil;
-			_currentViewType = kDNDetailViewTypeComments;
+//			self.navigationItem.rightBarButtonItem = nil;
+//			_currentViewType = kDNDetailViewTypeComments;
+
 		}
+		self.navigationItem.rightBarButtonItem = self.commentsBarButtonItem;
 		
 		
 		if (_currentViewType == kDNDetailViewTypeComments) {
@@ -363,7 +367,7 @@
 	"$('head').append('<meta name=\"viewport\" content=\"width=device-width, initial-scale = 1, minimum-scale = 1, maximum-scale = 1\">');$('body').append('<style>";
 	jsString = [jsString stringByAppendingFormat:@"%@</style>');",cssContent];
 	
-	NSLog(@"%@", jsString);
+//	NSLog(@"%@", jsString);
 	//.append('<link rel=\"stylesheet\" href=\"http://flogehring.com/dn/comments.css\">');";
 	[self.mainWebView stringByEvaluatingJavaScriptFromString:jsString];
 	
@@ -441,15 +445,24 @@
 -(void)commentsButtonTapped:(id)sender
 {
 	NSLog(@"Show comments");
-	if (_currentViewType == kDNDetailViewTypeStory) {
-		[self loadURL:_detailItem.commentsURL];
-		_currentViewType = kDNDetailViewTypeComments;
-	}else{
-		[self loadURL:_detailItem.storyURL];
-		_currentViewType = kDNDetailViewTypeStory;
-	}
+//	if (_currentViewType == kDNDetailViewTypeStory) {
+//		[self loadURL:_detailItem.commentsURL];
+//		_currentViewType = kDNDetailViewTypeComments;
+//	}else{
+//		[self loadURL:_detailItem.storyURL];
+//		_currentViewType = kDNDetailViewTypeStory;
+//	}
+	_commentsView = [[DNCommentsViewController alloc]init];
+	_commentsView.story = _story;
+
+	UINavigationController *navC = [[UINavigationController alloc]initWithRootViewController:_commentsView];
+	
+	[self.navigationController presentViewController:navC animated:YES completion:^(){}];
+	
 
 }
+
+
 
 - (void)doneButtonClicked:(id)sender {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
@@ -533,15 +546,15 @@
 
 #pragma mark - Managing the detail item
 
-- (void)setDetailItem:(id)newDetailItem
-{
-    if (_detailItem != newDetailItem) {
-        _detailItem = newDetailItem;
-        
-        // Update the view.
-//        [self configureView];
-    }
-}
+//- (void)setStory:(id)newDetailItem
+//{
+//    if (_story != newDetailItem) {
+//        _story = newDetailItem;
+//        
+//        // Update the view.
+////        [self configureView];
+//    }
+//}
 
 //- (void)configureView
 //{
@@ -582,7 +595,7 @@
 
 - (void)shareButtonTapped:(id)sender {
 	
-	NSURL *shareURL = self.detailItem.storyURL;
+	NSURL *shareURL = self.story.storyURL;
 	
 	NSString *textToShare = @"Look what I've found on DesignerNews… ";
 	NSArray *activityItems = @[textToShare, shareURL];

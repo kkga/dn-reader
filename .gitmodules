@@ -1,3 +1,6 @@
 [submodule "DNReader/HTMLParser"]
 	path = DNReader/HTMLParser
 	url = https://github.com/zootreeves/Objective-C-HMTL-Parser.git
+[submodule "DNReader/SVProgressHUD"]
+	path = DNReader/SVProgressHUD
+	url = https://github.com/samvermette/SVProgressHUD.git

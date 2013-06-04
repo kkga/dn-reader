@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DNCommentPageModel : NSObject
-
+@interface DNCommentPageModel : DNStory
+@property (nonatomic, strong) NSString *storyBody;
+@property (nonatomic, strong) NSArray *comments;
 @end
