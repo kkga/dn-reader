@@ -8,7 +8,7 @@
 
 #import "DNAppDelegate.h"
 #import "DNMasterViewController.h"
-
+#import "PocketAPI.h"
 
 @implementation DNAppDelegate
 
@@ -20,7 +20,14 @@
 	[TestFlight takeOff:@"82256e4f-ca35-4930-a539-c4b0062bb8c1"];
 #endif
 	
+	//Load read items
 	[DNCrawler load];
+	
+	//Configure the Pocked SDK
+	[[PocketAPI sharedAPI] setURLScheme:@"dnr"];
+	[[PocketAPI sharedAPI] setConsumerKey:@"15117-5676e41b0d51c221428525cb"];
+	
+	
 	
 	[[UINavigationBar appearance] setBackgroundImage:	[[UIImage imageNamed:@"navbar"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 10, 0, 10) resizingMode:UIImageResizingModeStretch] forBarMetrics:UIBarMetricsDefault];
 	
@@ -39,6 +46,20 @@
 	self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+-(BOOL)application:(UIApplication *)application
+           openURL:(NSURL *)url
+ sourceApplication:(NSString *)sourceApplication
+        annotation:(id)annotation{
+	
+    if([[PocketAPI sharedAPI] handleOpenURL:url]){
+        return YES;
+    }else{
+        // if you handle your own custom url-schemes, do it here
+        return NO;
+    }
+	
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

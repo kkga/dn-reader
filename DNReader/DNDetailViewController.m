@@ -10,6 +10,7 @@
 #import "ARChromeActivity.h"
 #import "TUSafariActivity.h"
 #import "DNActivityProvider.h"
+#import "DNPocketAPIActivity.h"
 #import "DNCommentsViewController.h"
 #import "SVProgressHUD.h"
 
@@ -167,13 +168,14 @@
     
     ARChromeActivity *chromeActivity = [[ARChromeActivity alloc] initWithCallbackURL:[NSURL URLWithString:@"dnr://"]];
     TUSafariActivity *safariActivity = [[TUSafariActivity alloc] init];
+	DNPocketAPIActivity *pocketActivity = [[DNPocketAPIActivity alloc]init];
     
 	DNActivityProvider *actProvider = [[DNActivityProvider alloc] init];
 	[actProvider setStory:self.story];
 	
 	NSArray* dataToShare = @[actProvider, self.story.storyURL];
 	
-    NSArray *applicationActivities = @[safariActivity, chromeActivity];
+    NSArray *applicationActivities = @[safariActivity, chromeActivity, pocketActivity];
     
     _activityVC = [[UIActivityViewController alloc] initWithActivityItems: dataToShare applicationActivities:applicationActivities];
     

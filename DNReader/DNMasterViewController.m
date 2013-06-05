@@ -237,8 +237,6 @@
 			[_stories addObjectsFromArray:newStories];
 		}
 		
-
-		
 		NSLog(@"%i stories", [_stories count]);
 		_pagesLoaded++;
 	

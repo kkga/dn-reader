@@ -4,3 +4,6 @@
 [submodule "DNReader/SVProgressHUD"]
 	path = DNReader/SVProgressHUD
 	url = https://github.com/samvermette/SVProgressHUD.git
+[submodule "DNReader/PocketSDK"]
+	path = DNReader/PocketSDK
+	url = https://github.com/Pocket/Pocket-ObjC-SDK.git

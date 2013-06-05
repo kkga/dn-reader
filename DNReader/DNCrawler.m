@@ -80,7 +80,7 @@ NSString * const kURLSuffixPopular = @"p/";
 		[story setStoryURLFromString:[[li findChildOfClass:@"StoryUrl"] getAttributeNamed:@"href"]];
 		
 		story.badgeName = [[[li findChildWithAttribute:@"class" matchingName:@"Badge" allowPartial:YES] className] substringFromIndex:6];
-		NSLog(@"%@", story.badgeName);
+//		NSLog(@"%@", story.badgeName);
 		
 		story.storyTitle = [[li findChildOfClass:@"StoryUrl"] contents];
 		story.username = [[li findChildOfClass:@"Submitter"] contents];
