@@ -15,5 +15,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *comments;
 @property (weak, nonatomic) IBOutlet UILabel *timestamp;
 @property (weak, nonatomic) IBOutlet UILabel *points;
+@property (weak, nonatomic) IBOutlet UIView *badgeView;
 
 @end

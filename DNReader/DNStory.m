@@ -34,4 +34,28 @@
 	
 	return [[NSURL alloc] initWithString:urlString];
 }
+
+-(UIColor *) badgeColor
+{
+	if ([_badgeName isEqualToString:@"Ask"])
+		return [UIColor DNBadgeColorAsk];
+	if ([_badgeName isEqualToString:@"Flat"])
+		return [UIColor DNBadgeColorFlat];
+	if ([_badgeName isEqualToString:@"Discussion"])
+		return [UIColor DNBadgeColorDiscussion];
+	if ([_badgeName isEqualToString:@"SiteDesign"])
+		return [UIColor DNBadgeColorSiteDesign];
+	if ([_badgeName isEqualToString:@"CSS"])
+		return [UIColor DNBadgeColorCSS];
+	if ([_badgeName isEqualToString:@"Apple"])
+		return [UIColor DNBadgeColorApple];
+	if ([_badgeName isEqualToString:@"Dribbble"])
+		return [UIColor DNBadgeColorDribbble];
+	if ([_badgeName isEqualToString:@"Type"])
+		return [UIColor DNBadgeColorType];
+	
+	
+	return [UIColor clearColor];
+}
+
 @end

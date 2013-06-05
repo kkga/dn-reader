@@ -16,7 +16,12 @@
 @interface DNCrawler : NSObject
 
 +(instancetype) sharedInstance;
++(void) markRead:(DNStory *) story;
++(BOOL)isRead:(DNStory *)story;
++(BOOL)load;
++(BOOL)save;
 
 -(NSArray *) storiesOfType:(DNStoryListType)listType forPage:(int) pageNumber;
 -(DNCommentPageModel *) commentsForStory:(DNStory *)story;
+
 @end

@@ -56,7 +56,7 @@
     
     if (!backBarButtonItem) {
         backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"SVWebViewController.bundle/iPhone/back"] style:UIBarButtonItemStylePlain target:self action:@selector(goBackClicked:)];
-        backBarButtonItem.imageInsets = UIEdgeInsetsMake(2.0f, 0.0f, -2.0f, 0.0f);
+        backBarButtonItem.imageInsets = UIEdgeInsetsMake(-2.0f, 0.0f, -2.0f, 0.0f);
 		backBarButtonItem.width = 18.0f;
     }
     return backBarButtonItem;
@@ -65,11 +65,14 @@
 -(UIBarButtonItem *)commentsBarButtonItem
 {
 	if (!commentsBarButtonItem) {
-        commentsBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Comments" style:UIBarButtonItemStylePlain target:self action:@selector(commentsButtonTapped:)];
-//        commentsBarButtonItem.imageInsets = UIEdgeInsetsMake(2.0f, 0.0f, -2.0f, 0.0f);
-//		commentsBarButtonItem.width = 18.0f;
+        commentsBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"bubble"] style:UIBarButtonItemStylePlain target:self action:@selector(commentsButtonTapped:)];
+        commentsBarButtonItem.imageInsets = UIEdgeInsetsMake(0.0f, 2.0f, 0.0f, -2.0f);
+		commentsBarButtonItem.width = 18.0f;
     }
-    return commentsBarButtonItem;
+	if ( ! [_story.storyURL isEqual:_story.commentsURL])
+		return commentsBarButtonItem;
+	else
+		return [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
 }
 
 - (UIBarButtonItem *)forwardBarButtonItem {
@@ -320,6 +323,8 @@
                      flexibleSpace,
                      refreshStopBarButtonItem,
                      flexibleSpace,
+					 self.commentsBarButtonItem,
+					 flexibleSpace,
                      self.actionBarButtonItem,
                      fixedSpace,
                      nil];
@@ -329,12 +334,12 @@
 		self.navigationController.toolbar.tintColor = self.navigationController.navigationBar.tintColor;
         self.toolbarItems = items;
 		
-		//Only show the comments button if there is a link
-		if ( ! [_story.commentsURL isEqual:_story.storyURL]) {
-			self.navigationItem.rightBarButtonItem = self.commentsBarButtonItem;
-		}else{
-			self.navigationItem.rightBarButtonItem = nil;
-		}
+//		//Only show the comments button if there is a link
+//		if ( ! [_story.commentsURL isEqual:_story.storyURL]) {
+//			self.navigationItem.rightBarButtonItem = self.commentsBarButtonItem;
+//		}else{
+//			self.navigationItem.rightBarButtonItem = nil;
+//		}
 
 
     }

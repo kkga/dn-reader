@@ -9,6 +9,10 @@
 #import "DNCrawler.h"
 #import "HTMLParser.h"
 
+@interface DNCrawler ()
+@property (nonatomic, strong) NSMutableDictionary *readStories;
+@end
+
 @implementation DNCrawler
 
 //const int kShiftTimeEdit = 10;
@@ -27,6 +31,8 @@ NSString * const kURLSuffixPopular = @"p/";
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedInstance = [[self alloc]init];
+		
+		sharedInstance.readStories = [[NSMutableDictionary alloc]init];
 		
     });
     return sharedInstance;
@@ -70,7 +76,12 @@ NSString * const kURLSuffixPopular = @"p/";
 	
 	for (HTMLNode *li in listItems) {
 		DNStory *story = [DNStory new];
+		
 		[story setStoryURLFromString:[[li findChildOfClass:@"StoryUrl"] getAttributeNamed:@"href"]];
+		
+		story.badgeName = [[[li findChildWithAttribute:@"class" matchingName:@"Badge" allowPartial:YES] className] substringFromIndex:6];
+		NSLog(@"%@", story.badgeName);
+		
 		story.storyTitle = [[li findChildOfClass:@"StoryUrl"] contents];
 		story.username = [[li findChildOfClass:@"Submitter"] contents];
 		story.domain = [[li findChildOfClass:@"Domain"] contents];
@@ -80,6 +91,9 @@ NSString * const kURLSuffixPopular = @"p/";
 		HTMLNode *commentsLink = [li findChildOfClass:@"CommentCount"];
 		[story setCommentsURLFromString:[commentsLink getAttributeNamed:@"href"]];
 		story.numberOfComments = [commentsLink contents];
+		
+		
+//		NSLog(@"%@, %@", story.storyTitle, story.storyURL);
 		
 		[stories addObject:story];
 	}
@@ -93,7 +107,7 @@ NSString * const kURLSuffixPopular = @"p/";
 
 	
 	NSError *error = nil;
-	NSLog(@"%@", story.commentsURL);
+	NSLog(@"Parsing comments at %@", story.commentsURL);
 	NSStringEncoding * encoding = nil;
 	NSString * htmlContent = [NSString stringWithContentsOfURL:story.commentsURL usedEncoding:encoding error:&error];
 	htmlContent = [htmlContent stringByReplacingOccurrencesOfString:@"<br />" withString:@"\n"];
@@ -127,13 +141,13 @@ NSString * const kURLSuffixPopular = @"p/";
 		comment.numberOfPoints = [[div findChildOfClass:@"UpvoteComment"]contents];
 		
 		NSMutableArray *paragraphs = [[div findChildTags:@"p"] mutableCopy];
-//		[paragraphs removeObjectAtIndex:0];
+
 		comment.content = [self concatParagraphs:paragraphs];
 		
 		NSString *nestingLevel = [div className];
 		nestingLevel = [nestingLevel substringFromIndex:8];
 		comment.nestingLevel = [[nestingLevel substringFromIndex:12] integerValue];
-//		NSLog(@"%@, %@, %i", nestingLevel, [nestingLevel substringFromIndex:12], [[nestingLevel substringFromIndex:12] integerValue]);
+
 		
 
 		[comments addObject:comment];
@@ -163,6 +177,58 @@ NSString * const kURLSuffixPopular = @"p/";
 	return sum;
 }
 
+-(NSMutableDictionary *)readStories
+{
+	if (!_readStories) {
+		_readStories = [[NSMutableDictionary alloc]init];
+	}
+	return _readStories;
+}
 
++(void)markRead:(DNStory *)story
+{
+	if ( ! [[story.storyURL absoluteString] isEqualToString:@"https://news.layervault.com/404"]) {
+		NSLog(@"Marking as read \"%@\"", story.storyTitle);
+		[[DNCrawler sharedInstance].readStories setObject:[NSNumber numberWithBool: YES] forKey:[story.storyURL absoluteString]];
+	}
+}
+
++(BOOL)isRead:(DNStory *)story
+{
+	if ([[DNCrawler sharedInstance].readStories objectForKey:[story.storyURL absoluteString]])
+		return YES;
+	else
+		return NO;
+}
+
++(BOOL)load
+{
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	NSString *filePath = [documentsDirectory stringByAppendingPathComponent: @"readStories.dn"];
+	@try {
+		[DNCrawler sharedInstance].readStories = [NSKeyedUnarchiver unarchiveObjectWithFile: filePath];
+		NSLog(@"Loading the read stories dictionary (%i)", [[DNCrawler sharedInstance].readStories count]);
+		return YES;
+	}
+	@catch (NSException *exception) {
+		NSLog(@"Archive didn't exist");
+		[DNCrawler sharedInstance].readStories = [[NSMutableDictionary alloc] init];
+		return NO;
+	}
+	@finally {
+		
+	}
+
+}
+
++(BOOL)save
+{
+	NSLog(@"Saving the read stories (%i)", [[DNCrawler sharedInstance].readStories count]);
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	NSString *filePath = [documentsDirectory stringByAppendingPathComponent: @"readStories.dn"];
+	return [NSKeyedArchiver archiveRootObject:[DNCrawler sharedInstance].readStories toFile:filePath];
+}
 
 @end

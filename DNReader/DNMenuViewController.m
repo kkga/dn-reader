@@ -55,7 +55,6 @@
 	UIButton *backgroundButton = [UIButton buttonWithType:UIButtonTypeCustom];
 	backgroundButton.frame = self.view.frame;
 	[backgroundButton addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
-//	backgroundButton.backgroundColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:1];
 	[self.view addSubview:backgroundButton];
 	
 	
@@ -96,11 +95,11 @@
 		_tableView.dataSource = self;
 		_tableView.contentInset = UIEdgeInsetsMake(36, 0, 0, 0);
 		
-		_tableView.backgroundColor = [UIColor colorWithRed:0.077 green:0.245 blue:0.542 alpha:1.000];
+		_tableView.backgroundColor = [UIColor DNBlueColor];
 		_tableView.backgroundView = nil;
 		
 		
-		[_tableView setSeparatorColor:[UIColor colorWithRed:0.092 green:0.187 blue:0.340 alpha:1.000]];
+		[_tableView setSeparatorColor:[UIColor DNDarkBlueColor]];
 		[_tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 		
 	}

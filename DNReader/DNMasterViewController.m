@@ -30,7 +30,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-		self.title = @"DN – Popular";
+		self.title = [[DNList sharedInstance]currentListTitle];
 		_pagesLoaded = 1;
 		_stories = [[NSMutableArray alloc]init];
 		_titleView = [[DNNavSelector alloc]initWithTitle:[[DNList sharedInstance] currentListTitle]];
@@ -40,6 +40,7 @@
     }
     return self;
 }
+
 							
 - (void)viewDidLoad
 {
@@ -92,6 +93,7 @@
 		[self.tableView reloadData];
 		[self refreshPulled];
 	}
+	[self.tableView reloadData];
 }
 
 
@@ -145,6 +147,7 @@
 	}else{
 		cell.username.text = @"";
 	}
+	[cell.username sizeToFit];
 	
 	if (story.numberOfPoints) {
 		cell.points.text = story.numberOfPoints;
@@ -163,7 +166,17 @@
 	}else{
 		cell.timestamp.text = @"";
 	}
+	
+	if ([DNCrawler isRead:story]) {
+		[cell.storyTitle setTextColor:[UIColor DNGrayColor]];
+	}else{
+		[cell.storyTitle setTextColor:[UIColor DNLightBlueColor]];
+	}
     
+	[cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+	
+	cell.badgeView.backgroundColor = [story badgeColor];
+	
 	
 	return cell;
 }
@@ -188,7 +201,11 @@
 {
 	
 	if (_allowSelection) {
+		
 		DNStory *currentStory = [_stories objectAtIndex:indexPath.row];
+		
+		[DNCrawler markRead:currentStory];
+		
 		if ([currentStory.commentsURL isEqual:currentStory.storyURL]) {
 			DNCommentsViewController *commentsView = [[DNCommentsViewController alloc]initWithNibName:nil bundle:nil];
 			commentsView.story = currentStory;

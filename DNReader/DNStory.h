@@ -24,7 +24,10 @@ typedef enum {
 @property (nonatomic, strong) NSString *numberOfPoints;
 @property (nonatomic, strong) NSString *numberOfComments;
 @property (nonatomic, strong) NSString *domain;
+@property (nonatomic, strong) NSString *badgeName;
 
 -(void)setStoryURLFromString:(NSString *)relativeStoryURLString;
 -(void)setCommentsURLFromString:(NSString *)relativeCommentsURLString;
+-(UIColor *) badgeColor;
+
 @end

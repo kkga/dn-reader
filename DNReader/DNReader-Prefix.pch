@@ -11,8 +11,10 @@
 #ifdef __OBJC__
 	#import <UIKit/UIKit.h>
 	#import <Foundation/Foundation.h>
+	#import "UIColor+DNColors.h"
 #endif
 
 #ifdef TESTFLIGHT
+#define NSLog TFLog
 #import "TestFlight.h"
 #endif

@@ -8,9 +8,7 @@
 
 #import "DNAppDelegate.h"
 #import "DNMasterViewController.h"
-#ifdef TESTFLIGHT
-#define NSLog TFLog
-#endif
+
 
 @implementation DNAppDelegate
 
@@ -22,15 +20,15 @@
 	[TestFlight takeOff:@"82256e4f-ca35-4930-a539-c4b0062bb8c1"];
 #endif
 	
-
+	[DNCrawler load];
 	
 	[[UINavigationBar appearance] setBackgroundImage:	[[UIImage imageNamed:@"navbar"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 10, 0, 10) resizingMode:UIImageResizingModeStretch] forBarMetrics:UIBarMetricsDefault];
 	
 	[[UIToolbar appearance] setBackgroundImage:	[[UIImage imageNamed:@"toolbar"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 10, 0, 10) resizingMode:UIImageResizingModeStretch] forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
 	
-	[[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTintColor:[UIColor colorWithRed:0.09 green:0.278 blue:0.69 alpha:1]];
+	[[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTintColor:[UIColor DNBlueColor]];
 	
-	[[UIRefreshControl appearance]setTintColor:[UIColor colorWithRed:0.251 green:0.478 blue:0.82 alpha:1]];
+	[[UIRefreshControl appearance]setTintColor:[UIColor DNLightBlueColor]];
 	
 
 	
@@ -51,6 +49,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
+	[DNCrawler save];
 	// Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
 	// If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }

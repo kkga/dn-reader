@@ -25,6 +25,16 @@
 		D80788F91758C0EC00087F1D /* DNCommentsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D80788F71758C0EC00087F1D /* DNCommentsHeaderView.m */; };
 		D80788FB1758C10100087F1D /* DNCommentsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D80788FA1758C10100087F1D /* DNCommentsHeaderView.xib */; };
 		D80788FC1758C10100087F1D /* DNCommentsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D80788FA1758C10100087F1D /* DNCommentsHeaderView.xib */; };
+		D8329AED175F16D5004BBDDF /* bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = D8329AEB175F16D5004BBDDF /* bubble.png */; };
+		D8329AEE175F16D5004BBDDF /* bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = D8329AEB175F16D5004BBDDF /* bubble.png */; };
+		D8329AEF175F16D5004BBDDF /* bubble@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8329AEC175F16D5004BBDDF /* bubble@2x.png */; };
+		D8329AF0175F16D5004BBDDF /* bubble@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8329AEC175F16D5004BBDDF /* bubble@2x.png */; };
+		D8329AF3175F224D004BBDDF /* UIColor+DNColors.m in Sources */ = {isa = PBXBuildFile; fileRef = D8329AF2175F224D004BBDDF /* UIColor+DNColors.m */; };
+		D8329AF4175F224D004BBDDF /* UIColor+DNColors.m in Sources */ = {isa = PBXBuildFile; fileRef = D8329AF2175F224D004BBDDF /* UIColor+DNColors.m */; };
+		D8329AF8175F2C1E004BBDDF /* UINavigationController+Orientation.m in Sources */ = {isa = PBXBuildFile; fileRef = D8329AF7175F2C1E004BBDDF /* UINavigationController+Orientation.m */; };
+		D8329AF9175F2C1E004BBDDF /* UINavigationController+Orientation.m in Sources */ = {isa = PBXBuildFile; fileRef = D8329AF7175F2C1E004BBDDF /* UINavigationController+Orientation.m */; };
+		D8329AFC175F2E8B004BBDDF /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8329AFA175F2E74004BBDDF /* MediaPlayer.framework */; };
+		D8329AFD175F2E95004BBDDF /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8329AFA175F2E74004BBDDF /* MediaPlayer.framework */; };
 		D85DDA4F1753A1C20006E2AB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D85DDA4E1753A1C20006E2AB /* UIKit.framework */; };
 		D85DDA511753A1C20006E2AB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D85DDA501753A1C20006E2AB /* Foundation.framework */; };
 		D85DDA531753A1C20006E2AB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D85DDA521753A1C20006E2AB /* CoreGraphics.framework */; };
@@ -158,6 +168,13 @@
 		D80788F61758C0EC00087F1D /* DNCommentsHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNCommentsHeaderView.h; sourceTree = "<group>"; };
 		D80788F71758C0EC00087F1D /* DNCommentsHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DNCommentsHeaderView.m; sourceTree = "<group>"; };
 		D80788FA1758C10100087F1D /* DNCommentsHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DNCommentsHeaderView.xib; sourceTree = "<group>"; };
+		D8329AEB175F16D5004BBDDF /* bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bubble.png; path = assets/bubble.png; sourceTree = "<group>"; };
+		D8329AEC175F16D5004BBDDF /* bubble@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bubble@2x.png"; path = "assets/bubble@2x.png"; sourceTree = "<group>"; };
+		D8329AF1175F224D004BBDDF /* UIColor+DNColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+DNColors.h"; sourceTree = "<group>"; };
+		D8329AF2175F224D004BBDDF /* UIColor+DNColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+DNColors.m"; sourceTree = "<group>"; };
+		D8329AF6175F2C1E004BBDDF /* UINavigationController+Orientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Orientation.h"; sourceTree = "<group>"; };
+		D8329AF7175F2C1E004BBDDF /* UINavigationController+Orientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Orientation.m"; sourceTree = "<group>"; };
+		D8329AFA175F2E74004BBDDF /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		D85DDA4B1753A1C20006E2AB /* DNReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DNReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D85DDA4E1753A1C20006E2AB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D85DDA501753A1C20006E2AB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -261,6 +278,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8329AFC175F2E8B004BBDDF /* MediaPlayer.framework in Frameworks */,
 				D8AC8FA6175E074900F36731 /* CoreText.framework in Frameworks */,
 				D8EA5CFC175CB659001039B5 /* CoreImage.framework in Frameworks */,
 				D8FF79291754ECB3004A8C7E /* QuartzCore.framework in Frameworks */,
@@ -277,6 +295,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8329AFD175F2E95004BBDDF /* MediaPlayer.framework in Frameworks */,
 				D8AC8FA7175E075400F36731 /* CoreText.framework in Frameworks */,
 				D8EA5CFD175CB660001039B5 /* CoreImage.framework in Frameworks */,
 				D8FF792A1754ECB8004A8C7E /* QuartzCore.framework in Frameworks */,
@@ -312,9 +331,6 @@
 		D80788E81758A45F00087F1D /* Detail */ = {
 			isa = PBXGroup;
 			children = (
-				D85DDA831753A6B50006E2AB /* DNCell.h */,
-				D85DDA841753A6B50006E2AB /* DNCell.m */,
-				D85DDA861753A6C50006E2AB /* DNCell.xib */,
 				D85DDA691753A1C20006E2AB /* DNDetailViewController.h */,
 				D85DDA6A1753A1C20006E2AB /* DNDetailViewController.m */,
 			);
@@ -328,6 +344,19 @@
 				D80788EA1758A5AA00087F1D /* DNCrawler.m */,
 			);
 			name = Crawler;
+			sourceTree = "<group>";
+		};
+		D8329AF5175F22DD004BBDDF /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				D8329AF1175F224D004BBDDF /* UIColor+DNColors.h */,
+				D8329AF2175F224D004BBDDF /* UIColor+DNColors.m */,
+				D8EA5CF7175CB59B001039B5 /* UIImage+Blur.h */,
+				D8EA5CF8175CB59B001039B5 /* UIImage+Blur.m */,
+				D8329AF6175F2C1E004BBDDF /* UINavigationController+Orientation.h */,
+				D8329AF7175F2C1E004BBDDF /* UINavigationController+Orientation.m */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 		D85DDA421753A1C10006E2AB = {
@@ -356,6 +385,7 @@
 		D85DDA4D1753A1C20006E2AB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D8329AFA175F2E74004BBDDF /* MediaPlayer.framework */,
 				D8AC8FA5175E074900F36731 /* CoreText.framework */,
 				D8EA5CFB175CB659001039B5 /* CoreImage.framework */,
 				D8FF79281754ECB3004A8C7E /* QuartzCore.framework */,
@@ -373,6 +403,7 @@
 			isa = PBXGroup;
 			children = (
 				D8C73E531753EE0600275EC2 /* assets */,
+				D8329AF5175F22DD004BBDDF /* Categories */,
 				D85DDA5D1753A1C20006E2AB /* DNAppDelegate.h */,
 				D85DDA5E1753A1C20006E2AB /* DNAppDelegate.m */,
 				D8EA5CF2175C81B7001039B5 /* Menu */,
@@ -415,6 +446,9 @@
 				D85DDA661753A1C20006E2AB /* DNMasterViewController.h */,
 				D85DDA671753A1C20006E2AB /* DNMasterViewController.m */,
 				D85DDA6C1753A1C20006E2AB /* DNMasterViewController.xib */,
+				D85DDA831753A6B50006E2AB /* DNCell.h */,
+				D85DDA841753A6B50006E2AB /* DNCell.m */,
+				D85DDA861753A6C50006E2AB /* DNCell.xib */,
 			);
 			name = List;
 			sourceTree = "<group>";
@@ -457,6 +491,8 @@
 		D8C73E531753EE0600275EC2 /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				D8329AEB175F16D5004BBDDF /* bubble.png */,
+				D8329AEC175F16D5004BBDDF /* bubble@2x.png */,
 				D8AC8F80175DD68900F36731 /* titlePressed.png */,
 				D8AC8F81175DD68900F36731 /* titlePressed@2x.png */,
 				D8AC8F8C175DD6B100F36731 /* checkmark.png */,
@@ -478,8 +514,6 @@
 				D8EA5CEB175C7866001039B5 /* DNMenuViewController.m */,
 				D8EA5CEE175C81B1001039B5 /* DNNavSelector.h */,
 				D8EA5CEF175C81B1001039B5 /* DNNavSelector.m */,
-				D8EA5CF7175CB59B001039B5 /* UIImage+Blur.h */,
-				D8EA5CF8175CB59B001039B5 /* UIImage+Blur.m */,
 			);
 			name = Menu;
 			sourceTree = "<group>";
@@ -650,6 +684,8 @@
 				D8AC8F8E175DD6B100F36731 /* checkmark.png in Resources */,
 				D8AC8F90175DD6B100F36731 /* checkmark@2x.png in Resources */,
 				D8AC8F97175DE95000F36731 /* SVProgressHUD.bundle in Resources */,
+				D8329AED175F16D5004BBDDF /* bubble.png in Resources */,
+				D8329AEF175F16D5004BBDDF /* bubble@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -692,6 +728,8 @@
 				D8AC8F8F175DD6B100F36731 /* checkmark.png in Resources */,
 				D8AC8F91175DD6B100F36731 /* checkmark@2x.png in Resources */,
 				D8AC8F98175DE95000F36731 /* SVProgressHUD.bundle in Resources */,
+				D8329AEE175F16D5004BBDDF /* bubble.png in Resources */,
+				D8329AF0175F16D5004BBDDF /* bubble@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -725,6 +763,8 @@
 				D8AC8F7E175DCBA800F36731 /* DNList.m in Sources */,
 				D8AC8F99175DE95000F36731 /* SVProgressHUD.m in Sources */,
 				D8AC8FA2175E054300F36731 /* TTTAttributedLabel.m in Sources */,
+				D8329AF3175F224D004BBDDF /* UIColor+DNColors.m in Sources */,
+				D8329AF8175F2C1E004BBDDF /* UINavigationController+Orientation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -755,6 +795,8 @@
 				D8AC8F7F175DCBA800F36731 /* DNList.m in Sources */,
 				D8AC8F9A175DE95000F36731 /* SVProgressHUD.m in Sources */,
 				D8AC8FA3175E054300F36731 /* TTTAttributedLabel.m in Sources */,
+				D8329AF4175F224D004BBDDF /* UIColor+DNColors.m in Sources */,
+				D8329AF9175F2C1E004BBDDF /* UINavigationController+Orientation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

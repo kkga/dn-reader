@@ -75,15 +75,8 @@
 {
 	if (pressed) {
 		[_titleButton setBackgroundImage:_activeButtonBackground forState:UIControlStateNormal];
-//		self.titleButton.backgroundColor = [UIColor colorWithRed:0.079 green:0.166 blue:0.304 alpha:1.000];
-//		self.titleButton.layer.borderWidth = 1;
-//		self.titleButton.layer.borderColor = [UIColor colorWithRed:0.970 green:0.923 blue:0.958 alpha:1.000].CGColor;
-//		self.titleButton.layer.cornerRadius = 15;
 	}else{
 		[_titleButton setBackgroundImage:nil forState:UIControlStateNormal];
-//		self.titleButton.backgroundColor = [UIColor clearColor];
-//		self.titleButton.layer.borderWidth = 0;
-//		self.titleButton.layer.borderColor = [UIColor clearColor].CGColor;
 	}
 }
 
