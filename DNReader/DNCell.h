@@ -7,14 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "TTTAttributedLabel.h"
+#import "DNBadgeView.h"
 @interface DNCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *storyTitle;
 @property (weak, nonatomic) IBOutlet UILabel *username;
 @property (weak, nonatomic) IBOutlet UILabel *domain;
-@property (weak, nonatomic) IBOutlet UILabel *comments;
-@property (weak, nonatomic) IBOutlet UILabel *timestamp;
-@property (weak, nonatomic) IBOutlet UILabel *points;
-@property (weak, nonatomic) IBOutlet UIView *badgeView;
+@property (weak, nonatomic) IBOutlet UILabel *metaInfo;
+@property (weak, nonatomic) IBOutlet DNBadgeView *badgeView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleConstraint;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *badgeViewWidthConstraint;
+
+-(void)markRead:(BOOL) read;
 
 @end

@@ -14,6 +14,20 @@ typedef enum {
     
 } DNURLType;
 
+typedef enum {
+	kDNBadgeTypeNone,
+    kDNBadgeTypeAsk,
+    kDNBadgeTypeFlat,
+	kDNBadgeTypeDiscussion,
+	kDNBadgeTypeShow,
+	kDNBadgeTypeSiteDesign,
+	kDNBadgeTypeCSS,
+	kDNBadgeTypeApple,
+	kDNBadgeTypeDribbble,
+	kDNBadgeTypeType
+} DNBadgeType;
+
+
 @interface DNStory : NSObject
 //@property (nonatomic, strong) NSString *sourceURL; // relative URL
 @property (nonatomic, strong) NSURL *storyURL;    // absoluteURL
@@ -25,9 +39,12 @@ typedef enum {
 @property (nonatomic, strong) NSString *numberOfComments;
 @property (nonatomic, strong) NSString *domain;
 @property (nonatomic, strong) NSString *badgeName;
+@property (nonatomic) DNBadgeType badgeType;
 
 -(void)setStoryURLFromString:(NSString *)relativeStoryURLString;
 -(void)setCommentsURLFromString:(NSString *)relativeCommentsURLString;
+-(void)markRead;
+-(BOOL)isRead;
 -(UIColor *) badgeColor;
 
 @end

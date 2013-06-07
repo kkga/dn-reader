@@ -137,14 +137,11 @@
 		[cell setSelectionStyle:UITableViewCellSelectionStyleNone];
 		cell.backgroundColor = [UIColor colorWithRed:0.120 green:0.356 blue:0.768 alpha:1.000];
 		cell.textLabel.textColor = [UIColor colorWithRed:0.714 green:0.741 blue:0.78 alpha:1];
-		cell.textLabel.shadowColor = [UIColor colorWithWhite:0.338 alpha:1.000];
-		cell.textLabel.shadowOffset = CGSizeMake(0, 1);
+		cell.textLabel.shadowColor = [UIColor clearColor];
+		cell.textLabel.shadowOffset = CGSizeMake(0, 0);
 		cell.backgroundView = nil;
 	}
     
-	
-
-	
 	if([self.checkedIndexPath isEqual:indexPath])
 	{
 		[((UIImageView *)cell.accessoryView) setImage:[UIImage imageNamed:@"checkmark"]];

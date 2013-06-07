@@ -13,6 +13,7 @@
 {
 	self = [super init];
 	if (self) {
+		self.storyTitle = story.storyTitle;
 		self.storyURL = story.storyURL;
 		self.commentsURL = story.commentsURL;
 		self.username = story.username;

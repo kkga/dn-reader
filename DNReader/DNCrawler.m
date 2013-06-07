@@ -201,7 +201,7 @@ NSString * const kURLSuffixPopular = @"p/";
 		return NO;
 }
 
-+(BOOL)load
++(BOOL)loadReadStories
 {
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -222,7 +222,7 @@ NSString * const kURLSuffixPopular = @"p/";
 
 }
 
-+(BOOL)save
++(BOOL)saveReadStories
 {
 	NSLog(@"Saving the read stories (%i)", [[DNCrawler sharedInstance].readStories count]);
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

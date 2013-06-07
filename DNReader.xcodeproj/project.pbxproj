@@ -73,6 +73,23 @@
 		D8AC8FA3175E054300F36731 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AC8F9F175E054300F36731 /* TTTAttributedLabel.m */; };
 		D8AC8FA6175E074900F36731 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8AC8FA5175E074900F36731 /* CoreText.framework */; };
 		D8AC8FA7175E075400F36731 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8AC8FA5175E074900F36731 /* CoreText.framework */; };
+		D8AFB455175F65AA00C4A4EA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8AFB454175F65AA00C4A4EA /* Security.framework */; };
+		D8AFB461175F65D100C4A4EA /* PocketAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AFB459175F65D100C4A4EA /* PocketAPI.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D8AFB462175F65D100C4A4EA /* PocketAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AFB459175F65D100C4A4EA /* PocketAPI.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D8AFB463175F65D100C4A4EA /* PocketAPILogin.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AFB45B175F65D100C4A4EA /* PocketAPILogin.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D8AFB464175F65D100C4A4EA /* PocketAPILogin.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AFB45B175F65D100C4A4EA /* PocketAPILogin.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D8AFB465175F65D100C4A4EA /* PocketAPIOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AFB45D175F65D100C4A4EA /* PocketAPIOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D8AFB466175F65D100C4A4EA /* PocketAPIOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AFB45D175F65D100C4A4EA /* PocketAPIOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D8AFB467175F65D100C4A4EA /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AFB460175F65D100C4A4EA /* SFHFKeychainUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D8AFB468175F65D100C4A4EA /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AFB460175F65D100C4A4EA /* SFHFKeychainUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D8AFB46B175F679600C4A4EA /* DNPocketAPIActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AFB46A175F679600C4A4EA /* DNPocketAPIActivity.m */; };
+		D8AFB46C175F679600C4A4EA /* DNPocketAPIActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AFB46A175F679600C4A4EA /* DNPocketAPIActivity.m */; };
+		D8AFB46F175F682600C4A4EA /* PocketActivity@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D8AFB46D175F682600C4A4EA /* PocketActivity@2x~iphone.png */; };
+		D8AFB470175F682600C4A4EA /* PocketActivity@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D8AFB46D175F682600C4A4EA /* PocketActivity@2x~iphone.png */; };
+		D8AFB471175F682600C4A4EA /* PocketActivity~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D8AFB46E175F682600C4A4EA /* PocketActivity~iphone.png */; };
+		D8AFB472175F682600C4A4EA /* PocketActivity~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D8AFB46E175F682600C4A4EA /* PocketActivity~iphone.png */; };
+		D8B9C3EB17607789008CBE9B /* DNBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B9C3EA17607789008CBE9B /* DNBadgeView.m */; };
+		D8B9C3EC17607789008CBE9B /* DNBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B9C3EA17607789008CBE9B /* DNBadgeView.m */; };
 		D8C73E061753E54C00275EC2 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8C73E041753E54C00275EC2 /* libTestFlight.a */; };
 		D8C73E361753E69500275EC2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D85DDA5A1753A1C20006E2AB /* main.m */; };
 		D8C73E371753E69500275EC2 /* DNAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D85DDA5E1753A1C20006E2AB /* DNAppDelegate.m */; };
@@ -213,6 +230,23 @@
 		D8AC8F9E175E054300F36731 /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTTAttributedLabel.h; path = TTTAttributedLabel/TTTAttributedLabel.h; sourceTree = "<group>"; };
 		D8AC8F9F175E054300F36731 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTTAttributedLabel.m; path = TTTAttributedLabel/TTTAttributedLabel.m; sourceTree = "<group>"; };
 		D8AC8FA5175E074900F36731 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		D8AFB454175F65AA00C4A4EA /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		D8AFB457175F65D100C4A4EA /* PocketAPI+NSOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PocketAPI+NSOperation.h"; sourceTree = "<group>"; };
+		D8AFB458175F65D100C4A4EA /* PocketAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PocketAPI.h; sourceTree = "<group>"; };
+		D8AFB459175F65D100C4A4EA /* PocketAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PocketAPI.m; sourceTree = "<group>"; };
+		D8AFB45A175F65D100C4A4EA /* PocketAPILogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PocketAPILogin.h; sourceTree = "<group>"; };
+		D8AFB45B175F65D100C4A4EA /* PocketAPILogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PocketAPILogin.m; sourceTree = "<group>"; };
+		D8AFB45C175F65D100C4A4EA /* PocketAPIOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PocketAPIOperation.h; sourceTree = "<group>"; };
+		D8AFB45D175F65D100C4A4EA /* PocketAPIOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PocketAPIOperation.m; sourceTree = "<group>"; };
+		D8AFB45E175F65D100C4A4EA /* PocketAPITypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PocketAPITypes.h; sourceTree = "<group>"; };
+		D8AFB45F175F65D100C4A4EA /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHFKeychainUtils.h; sourceTree = "<group>"; };
+		D8AFB460175F65D100C4A4EA /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFKeychainUtils.m; sourceTree = "<group>"; };
+		D8AFB469175F679600C4A4EA /* DNPocketAPIActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNPocketAPIActivity.h; sourceTree = "<group>"; };
+		D8AFB46A175F679600C4A4EA /* DNPocketAPIActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DNPocketAPIActivity.m; sourceTree = "<group>"; };
+		D8AFB46D175F682600C4A4EA /* PocketActivity@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PocketActivity@2x~iphone.png"; path = "DNActivityProvider/PocketActivity@2x~iphone.png"; sourceTree = "<group>"; };
+		D8AFB46E175F682600C4A4EA /* PocketActivity~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PocketActivity~iphone.png"; path = "DNActivityProvider/PocketActivity~iphone.png"; sourceTree = "<group>"; };
+		D8B9C3E917607789008CBE9B /* DNBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNBadgeView.h; sourceTree = "<group>"; };
+		D8B9C3EA17607789008CBE9B /* DNBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DNBadgeView.m; sourceTree = "<group>"; };
 		D8C73E041753E54C00275EC2 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		D8C73E051753E54C00275EC2 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		D8C73E4F1753E69500275EC2 /* DNReader α.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DNReader α.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -278,6 +312,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8AFB455175F65AA00C4A4EA /* Security.framework in Frameworks */,
 				D8329AFC175F2E8B004BBDDF /* MediaPlayer.framework in Frameworks */,
 				D8AC8FA6175E074900F36731 /* CoreText.framework in Frameworks */,
 				D8EA5CFC175CB659001039B5 /* CoreImage.framework in Frameworks */,
@@ -367,6 +402,13 @@
 				D8C73E561753EE3000275EC2 /* DNRIcon@2x.png */,
 				D8C73E541753EE2D00275EC2 /* DNRIcon.png */,
 				D85DDA541753A1C20006E2AB /* DNReader */,
+				D8AFB456175F65D100C4A4EA /* PocketSDK */,
+				D8AC8FA4175E054800F36731 /* TTTAttributedLabel */,
+				D8AC8F93175DE95000F36731 /* SVProgressHUD */,
+				D8FF78D217548151004A8C7E /* HTMLParser */,
+				D8FF791D1754C1DF004A8C7E /* DNActivityHandler */,
+				D8FF78E417549541004A8C7E /* ARChromeActivity */,
+				D8FF78EB17549541004A8C7E /* TUSafariActivity */,
 				D85DDA4D1753A1C20006E2AB /* Frameworks */,
 				D85DDA4C1753A1C20006E2AB /* Products */,
 				D8C73E501753E69600275EC2 /* DNReader α-Info.plist */,
@@ -385,6 +427,7 @@
 		D85DDA4D1753A1C20006E2AB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D8AFB454175F65AA00C4A4EA /* Security.framework */,
 				D8329AFA175F2E74004BBDDF /* MediaPlayer.framework */,
 				D8AC8FA5175E074900F36731 /* CoreText.framework */,
 				D8EA5CFB175CB659001039B5 /* CoreImage.framework */,
@@ -413,12 +456,6 @@
 				D80788E017589D5900087F1D /* Comments */,
 				D8AC8F9B175DFF2500F36731 /* Models */,
 				D8C73E051753E54C00275EC2 /* TestFlight.h */,
-				D8AC8FA4175E054800F36731 /* TTTAttributedLabel */,
-				D8AC8F93175DE95000F36731 /* SVProgressHUD */,
-				D8FF78D217548151004A8C7E /* HTMLParser */,
-				D8FF791D1754C1DF004A8C7E /* DNActivityHandler */,
-				D8FF78E417549541004A8C7E /* ARChromeActivity */,
-				D8FF78EB17549541004A8C7E /* TUSafariActivity */,
 				D85DDA551753A1C20006E2AB /* Supporting Files */,
 			);
 			path = DNReader;
@@ -449,6 +486,8 @@
 				D85DDA831753A6B50006E2AB /* DNCell.h */,
 				D85DDA841753A6B50006E2AB /* DNCell.m */,
 				D85DDA861753A6C50006E2AB /* DNCell.xib */,
+				D8B9C3E917607789008CBE9B /* DNBadgeView.h */,
+				D8B9C3EA17607789008CBE9B /* DNBadgeView.m */,
 			);
 			name = List;
 			sourceTree = "<group>";
@@ -461,7 +500,7 @@
 				D8AC8F96175DE95000F36731 /* SVProgressHUD.m */,
 			);
 			name = SVProgressHUD;
-			path = SVProgressHUD/SVProgressHUD;
+			path = DNReader/SVProgressHUD/SVProgressHUD;
 			sourceTree = "<group>";
 		};
 		D8AC8F9B175DFF2500F36731 /* Models */ = {
@@ -486,6 +525,25 @@
 				D8AC8F9F175E054300F36731 /* TTTAttributedLabel.m */,
 			);
 			name = TTTAttributedLabel;
+			path = DNReader;
+			sourceTree = "<group>";
+		};
+		D8AFB456175F65D100C4A4EA /* PocketSDK */ = {
+			isa = PBXGroup;
+			children = (
+				D8AFB457175F65D100C4A4EA /* PocketAPI+NSOperation.h */,
+				D8AFB458175F65D100C4A4EA /* PocketAPI.h */,
+				D8AFB459175F65D100C4A4EA /* PocketAPI.m */,
+				D8AFB45A175F65D100C4A4EA /* PocketAPILogin.h */,
+				D8AFB45B175F65D100C4A4EA /* PocketAPILogin.m */,
+				D8AFB45C175F65D100C4A4EA /* PocketAPIOperation.h */,
+				D8AFB45D175F65D100C4A4EA /* PocketAPIOperation.m */,
+				D8AFB45E175F65D100C4A4EA /* PocketAPITypes.h */,
+				D8AFB45F175F65D100C4A4EA /* SFHFKeychainUtils.h */,
+				D8AFB460175F65D100C4A4EA /* SFHFKeychainUtils.m */,
+			);
+			name = PocketSDK;
+			path = DNReader/PocketSDK/SDK;
 			sourceTree = "<group>";
 		};
 		D8C73E531753EE0600275EC2 /* assets */ = {
@@ -527,7 +585,8 @@
 				D8FF78D617548151004A8C7E /* HTMLParser.m */,
 				D8FF78D717548151004A8C7E /* README.md */,
 			);
-			path = HTMLParser;
+			name = HTMLParser;
+			path = DNReader/HTMLParser;
 			sourceTree = "<group>";
 		};
 		D8FF78E417549541004A8C7E /* ARChromeActivity */ = {
@@ -540,7 +599,8 @@
 				D8FF78E917549541004A8C7E /* ARChromeActivity@2x~ipad.png */,
 				D8FF78EA17549541004A8C7E /* ARChromeActivity~ipad.png */,
 			);
-			path = ARChromeActivity;
+			name = ARChromeActivity;
+			path = DNReader/ARChromeActivity;
 			sourceTree = "<group>";
 		};
 		D8FF78EB17549541004A8C7E /* TUSafariActivity */ = {
@@ -554,7 +614,8 @@
 				D8FF78FF17549541004A8C7E /* TUSafariActivity.h */,
 				D8FF790017549541004A8C7E /* TUSafariActivity.m */,
 			);
-			path = TUSafariActivity;
+			name = TUSafariActivity;
+			path = DNReader/TUSafariActivity;
 			sourceTree = "<group>";
 		};
 		D8FF791D1754C1DF004A8C7E /* DNActivityHandler */ = {
@@ -562,8 +623,13 @@
 			children = (
 				D8FF79191754C1DB004A8C7E /* DNActivityProvider.h */,
 				D8FF791A1754C1DB004A8C7E /* DNActivityProvider.m */,
+				D8AFB46D175F682600C4A4EA /* PocketActivity@2x~iphone.png */,
+				D8AFB46E175F682600C4A4EA /* PocketActivity~iphone.png */,
+				D8AFB469175F679600C4A4EA /* DNPocketAPIActivity.h */,
+				D8AFB46A175F679600C4A4EA /* DNPocketAPIActivity.m */,
 			);
 			name = DNActivityHandler;
+			path = DNReader;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -686,6 +752,8 @@
 				D8AC8F97175DE95000F36731 /* SVProgressHUD.bundle in Resources */,
 				D8329AED175F16D5004BBDDF /* bubble.png in Resources */,
 				D8329AEF175F16D5004BBDDF /* bubble@2x.png in Resources */,
+				D8AFB46F175F682600C4A4EA /* PocketActivity@2x~iphone.png in Resources */,
+				D8AFB471175F682600C4A4EA /* PocketActivity~iphone.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -730,6 +798,8 @@
 				D8AC8F98175DE95000F36731 /* SVProgressHUD.bundle in Resources */,
 				D8329AEE175F16D5004BBDDF /* bubble.png in Resources */,
 				D8329AF0175F16D5004BBDDF /* bubble@2x.png in Resources */,
+				D8AFB470175F682600C4A4EA /* PocketActivity@2x~iphone.png in Resources */,
+				D8AFB472175F682600C4A4EA /* PocketActivity~iphone.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -765,6 +835,12 @@
 				D8AC8FA2175E054300F36731 /* TTTAttributedLabel.m in Sources */,
 				D8329AF3175F224D004BBDDF /* UIColor+DNColors.m in Sources */,
 				D8329AF8175F2C1E004BBDDF /* UINavigationController+Orientation.m in Sources */,
+				D8AFB461175F65D100C4A4EA /* PocketAPI.m in Sources */,
+				D8AFB463175F65D100C4A4EA /* PocketAPILogin.m in Sources */,
+				D8AFB465175F65D100C4A4EA /* PocketAPIOperation.m in Sources */,
+				D8AFB467175F65D100C4A4EA /* SFHFKeychainUtils.m in Sources */,
+				D8AFB46B175F679600C4A4EA /* DNPocketAPIActivity.m in Sources */,
+				D8B9C3EB17607789008CBE9B /* DNBadgeView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -797,6 +873,12 @@
 				D8AC8FA3175E054300F36731 /* TTTAttributedLabel.m in Sources */,
 				D8329AF4175F224D004BBDDF /* UIColor+DNColors.m in Sources */,
 				D8329AF9175F2C1E004BBDDF /* UINavigationController+Orientation.m in Sources */,
+				D8AFB462175F65D100C4A4EA /* PocketAPI.m in Sources */,
+				D8AFB464175F65D100C4A4EA /* PocketAPILogin.m in Sources */,
+				D8AFB466175F65D100C4A4EA /* PocketAPIOperation.m in Sources */,
+				D8AFB468175F65D100C4A4EA /* SFHFKeychainUtils.m in Sources */,
+				D8AFB46C175F679600C4A4EA /* DNPocketAPIActivity.m in Sources */,
+				D8B9C3EC17607789008CBE9B /* DNBadgeView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

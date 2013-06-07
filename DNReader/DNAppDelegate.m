@@ -9,6 +9,7 @@
 #import "DNAppDelegate.h"
 #import "DNMasterViewController.h"
 #import "PocketAPI.h"
+#import "DNCrawler.h"
 
 @implementation DNAppDelegate
 
@@ -21,7 +22,7 @@
 #endif
 	
 	//Load read items
-	[DNCrawler load];
+	[DNCrawler loadReadStories];
 	
 	//Configure the Pocked SDK
 	[[PocketAPI sharedAPI] setURLScheme:@"dnr"];
@@ -70,7 +71,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-	[DNCrawler save];
+	[DNCrawler saveReadStories];
 	// Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
 	// If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }

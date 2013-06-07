@@ -10,6 +10,15 @@
 
 @implementation DNCommentsCell
 
+-(void)awakeFromNib
+{
+	[super awakeFromNib];
+	UIColor *gray = [UIColor DNGrayColor];
+	_timestamp.textColor = gray;
+	_points.textColor = gray;
+	
+}
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];

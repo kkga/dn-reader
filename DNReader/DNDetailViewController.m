@@ -14,7 +14,7 @@
 #import "DNCommentsViewController.h"
 #import "SVProgressHUD.h"
 
-@interface DNDetailViewController () <UIWebViewDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
+@interface DNDetailViewController () <UIWebViewDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, strong, readonly) UIBarButtonItem *backBarButtonItem;
 @property (nonatomic, strong, readonly) UIBarButtonItem *forwardBarButtonItem;
@@ -66,9 +66,49 @@
 -(UIBarButtonItem *)commentsBarButtonItem
 {
 	if (!commentsBarButtonItem) {
-        commentsBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"bubble"] style:UIBarButtonItemStylePlain target:self action:@selector(commentsButtonTapped:)];
-        commentsBarButtonItem.imageInsets = UIEdgeInsetsMake(0.0f, 2.0f, 0.0f, -2.0f);
-		commentsBarButtonItem.width = 18.0f;
+//        commentsBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"bubble"] style:UIBarButtonItemStylePlain target:self action:@selector(commentsButtonTapped:)];
+		
+		
+		UIButton *commentsButton = [UIButton buttonWithType:UIButtonTypeCustom];
+		commentsButton.frame = CGRectMake(0, 0, 20, 21);
+		
+		UIImageView *commentsIcon = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"bubble"]];
+		[commentsButton addSubview:commentsIcon];
+		
+		CGRect imageFrame = commentsIcon.frame;
+		imageFrame.origin.y = -1;
+		commentsIcon.frame = imageFrame;
+		
+		UILabel *numberLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
+		numberLabel.textAlignment = NSTextAlignmentCenter;
+		numberLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:10];
+		numberLabel.backgroundColor = [UIColor clearColor];
+		numberLabel.textColor = [UIColor DNLightBlueColor];
+		
+		
+		int intNumber = [_story.numberOfComments integerValue];
+		NSString *number = [NSString stringWithFormat:@"%i", intNumber];
+		if (number.length > 2) {
+			number = @"∞";
+		}
+		numberLabel.text = number;
+		
+		[commentsButton addSubview:numberLabel];
+		
+		commentsButton.backgroundColor = [UIColor clearColor];
+		[commentsButton addTarget:self action:@selector(commentsButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+		[commentsButton setShowsTouchWhenHighlighted:YES];
+
+		
+		
+		commentsBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:commentsButton];
+
+
+//        commentsBarButtonItem.imageInsets = UIEdgeInsetsMake(0.0f, 2.0f, 0.0f, -2.0f);
+//		commentsBarButtonItem.width = 18.0f;
+		
+		
+		
     }
 	if ( ! [_story.storyURL isEqual:_story.commentsURL])
 		return commentsBarButtonItem;
@@ -353,6 +393,27 @@
 #pragma mark -
 #pragma mark UIWebViewDelegate
 
+-(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+	NSLog(@"Scheme: %@, Host: %@", request.URL.scheme, request.URL.host);
+	if(([request.URL.host hasSuffix:@".apple.com"] ||
+		[request.URL.host hasSuffix:@".youtube.com"] ||
+		! ([request.URL.scheme isEqualToString:@"http"] || [request.URL.scheme isEqualToString:@"https"]))
+	   
+	   && [[UIApplication sharedApplication] canOpenURL:request.URL])
+	{
+		UIAlertView *alert = [[UIAlertView alloc]initWithTitle:[NSString stringWithFormat: @"Leave %@?", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"]]
+													   message:@"The link is requesting to open an external application. Would you like to continue?"
+													  delegate:self
+											 cancelButtonTitle:@"Cancel"
+											 otherButtonTitles:@"Open", nil];
+		[alert show];
+		return NO;
+	}else{
+		return YES;
+	}
+
+}
 - (void)webViewDidStartLoad:(UIWebView *)webView {
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [self updateToolbarItems];
@@ -369,6 +430,15 @@
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     [self updateToolbarItems];
+}
+
+#pragma mark - UIAlertView Delegate
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	if (buttonIndex == 1) {
+		[[UIApplication sharedApplication]openURL:self.URL];
+	}
 }
 
 #pragma mark - Target actions
@@ -410,7 +480,8 @@
 	[SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
 	_commentsView = [[DNCommentsViewController alloc]init];
 	_commentsView.story = _story;
-
+	_commentsView.title = _story.numberOfComments;
+	
 	UINavigationController *navC = [[UINavigationController alloc]initWithRootViewController:_commentsView];
 	
 	[self.navigationController presentViewController:navC animated:YES completion:^(){}];

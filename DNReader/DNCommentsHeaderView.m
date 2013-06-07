@@ -10,6 +10,15 @@
 
 @implementation DNCommentsHeaderView
 
+-(void)awakeFromNib
+{
+	[super awakeFromNib];
+	UIColor *gray = [UIColor DNGrayColor];
+	_timestamp.textColor = gray;
+	_username.textColor = gray;
+	
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];

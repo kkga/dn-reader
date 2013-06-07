@@ -12,6 +12,7 @@
 #import "DNCommentsHeaderView.h"
 #import "SVProgressHUD.h"
 #import "DNDetailViewController.h"
+#import "DNBadgeView.h"
 
 @interface DNCommentsViewController ()
 @property (nonatomic, strong) DNCommentPageModel *data;
@@ -49,26 +50,38 @@
 		self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(closeCommentsView:)];
 	}
 	
+	UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+	[refreshControl addTarget:self action:@selector(refreshComments) forControlEvents:UIControlEventValueChanged];
+	self.refreshControl = refreshControl;
+	
+	
 	[self refreshComments];
 
 }
 
+-(void)viewWillDisappear:(BOOL)animated
+{
+	[SVProgressHUD dismiss];
+}
+
 -(DNCommentsHeaderView *)headerView
 {
+	CGSize bodySize = [_data.storyBody sizeWithFont:[UIFont fontWithName:@"HelveticaNeue" size:14] constrainedToSize:CGSizeMake(self.view.frame.size.width - 50, 9999) lineBreakMode:NSLineBreakByWordWrapping];
+	CGSize titleSize = [_story.storyTitle sizeWithFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:17] constrainedToSize:CGSizeMake(self.view.frame.size.width - 50, 9999) lineBreakMode:NSLineBreakByWordWrapping];
+	
 	if (!_headerView) {
-		CGSize bodySize = [_data.storyBody sizeWithFont:[UIFont fontWithName:@"HelveticaNeue" size:14] constrainedToSize:CGSizeMake(self.view.frame.size.width - 50, 9999) lineBreakMode:NSLineBreakByWordWrapping];
-		CGSize titleSize = [_story.storyTitle sizeWithFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:17] constrainedToSize:CGSizeMake(self.view.frame.size.width - 50, 9999) lineBreakMode:NSLineBreakByWordWrapping];
-		float headerHeight = titleSize.height + bodySize.height + 60;
 		
-		
+		float headerHeight = titleSize.height + bodySize.height + 80;
 		_headerView = [[DNCommentsHeaderView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, headerHeight)];
-		
 		_headerView.separator.backgroundColor = [UIColor DNLightBlueColor];
 
 	}
 	if (_story.badgeColor != [UIColor clearColor]) {
 		_headerView.separator.backgroundColor = _story.badgeColor;
 	}
+	
+	[_headerView.badgeView setTitleText:_story.badgeName];
+	_headerView.badgeView.backgroundColor = [_story badgeColor];
 	
 	_headerView.title.textColor = [UIColor DNLightBlueColor];
 	_headerView.title.dataDetectorTypes = UIDataDetectorTypeAll;
@@ -87,7 +100,8 @@
 	_headerView.body.text = _data.storyBody;
 	
 	
-	
+	_headerView.storyBodyHeightConstraint.constant = bodySize.height;
+	_headerView.storyTitleHeightConstraint.constant = titleSize.height;
 
 
 	
@@ -141,6 +155,7 @@
     DNCommentsCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[DNCommentsCell alloc] init];
+		
     }
     
     // Configure the cell...
@@ -181,6 +196,8 @@
 	cell.comment.linkAttributes = linkAttributes;
 	cell.comment.activeLinkAttributes = activeLinkAttributes;
 	cell.comment.delegate = self;
+//	cell.comment.lineHeightMultiple = 1.1;
+	
 	cell.comment.text = comment.content;
 	
     return cell;
@@ -221,7 +238,10 @@
 -(void)refreshComments
 {	
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-	[SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+	if (! [self.refreshControl isRefreshing]) {
+		[SVProgressHUD show];
+	}
+
 	
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^(void) {
 		

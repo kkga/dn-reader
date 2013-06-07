@@ -16,6 +16,7 @@
 
 +(instancetype)DNBadgeColorFlat;
 +(instancetype)DNBadgeColorDiscussion;
++(instancetype)DNBadgeColorShow;
 +(instancetype)DNBadgeColorAsk;
 +(instancetype)DNBadgeColorSiteDesign;
 +(instancetype)DNBadgeColorCSS;

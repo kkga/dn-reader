@@ -35,6 +35,10 @@
 {
 	return [UIColor colorWithRed:0.715 green:0.741 blue:0.783 alpha:1.000];
 }
++(instancetype)DNBadgeColorShow
+{
+	return [UIColor colorWithRed:0.935 green:0.637 blue:0.180 alpha:1.000];
+}
 +(instancetype)DNBadgeColorAsk
 {
 	return [UIColor colorWithRed:0.096 green:0.736 blue:0.387 alpha:1.000];

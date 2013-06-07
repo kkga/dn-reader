@@ -116,25 +116,28 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	
 	CGSize size = [[[_stories objectAtIndex:indexPath.row] storyTitle] sizeWithFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:17] constrainedToSize:CGSizeMake(self.view.frame.size.width - 50, 9999) lineBreakMode:NSLineBreakByWordWrapping];
 	
-	return size.height + 60;
+	return size.height + 65;
+	
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	
+	
     static NSString *CellIdentifier = @"DNCell";
-     
     DNCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[DNCell alloc] init];
+		[cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     }
 
 	DNStory *story = [_stories objectAtIndex:indexPath.row];
-
+	
 	cell.storyTitle.text = story.storyTitle;
-	[cell.storyTitle sizeToFit];
 	
 	if (story.domain) {
 		cell.domain.text = [NSString stringWithFormat:@"∙ %@",story.domain];
@@ -147,38 +150,33 @@
 	}else{
 		cell.username.text = @"";
 	}
-	[cell.username sizeToFit];
 	
-	if (story.numberOfPoints) {
-		cell.points.text = story.numberOfPoints;
-	}else{
-		cell.points.text = @"";
-	}
 	
-	if (story.numberOfComments) {
-		cell.comments.text = [NSString stringWithFormat:@"∙ %@",story.numberOfComments];
-	}else{
-		cell.comments.text = @"";
-	}
+	//The storys meta info
+	NSString *metaInfo = nil;
+	if (story.numberOfPoints)
+		metaInfo = story.numberOfPoints;
+	else
+		metaInfo = @"";
 	
-	if (story.timestamp) {
-		cell.timestamp.text = [NSString stringWithFormat:@"∙ %@",story.timestamp];
-	}else{
-		cell.timestamp.text = @"";
-	}
+	if (story.numberOfComments)
+		metaInfo = [NSString stringWithFormat:@"%@ ∙ %@", metaInfo,story.numberOfComments];
+	if (story.timestamp) 
+		metaInfo = [NSString stringWithFormat:@"%@ ∙ %@", metaInfo, story.timestamp];
 	
-	if ([DNCrawler isRead:story]) {
-		[cell.storyTitle setTextColor:[UIColor DNGrayColor]];
-	}else{
-		[cell.storyTitle setTextColor:[UIColor DNLightBlueColor]];
-	}
-    
-	[cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+	cell.metaInfo.text = metaInfo;
 	
+	
+	
+	//Highlight badged posts 
+	[cell.badgeView setTitleText:story.badgeName];
 	cell.badgeView.backgroundColor = [story badgeColor];
-	
+
+	//Highlight new posts
+	[cell markRead:[story isRead]];
 	
 	return cell;
+	
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

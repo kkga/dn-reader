@@ -7,7 +7,7 @@
 //
 
 #import "DNStory.h"
-
+#import "DNCrawler.h"
 @implementation DNStory
 -(void)setStoryURLFromString:(NSString *)relativeStoryURLString
 {
@@ -35,27 +35,89 @@
 	return [[NSURL alloc] initWithString:urlString];
 }
 
+-(void)setBadgeName:(NSString *)badgeName
+{
+	_badgeName = badgeName;
+	if (!badgeName) {
+		_badgeType = kDNBadgeTypeNone;
+		return;
+	}
+	if ([_badgeName isEqualToString:@"Ask"])
+		_badgeType = kDNBadgeTypeAsk;
+
+	if ([_badgeName isEqualToString:@"Flat"])
+		_badgeType = kDNBadgeTypeFlat;
+
+	if ([_badgeName isEqualToString:@"Discussion"])
+		_badgeType = kDNBadgeTypeDiscussion;
+
+	if ([_badgeName isEqualToString:@"Show"])
+		_badgeType = kDNBadgeTypeShow;
+
+	if ([_badgeName isEqualToString:@"SiteDesign"])
+	{
+		_badgeType = kDNBadgeTypeSiteDesign;
+		_badgeName = @"Site Design";
+	}
+		
+
+	if ([_badgeName isEqualToString:@"CSS"])
+		_badgeType = kDNBadgeTypeCSS;
+
+	if ([_badgeName isEqualToString:@"Apple"])
+		_badgeType = kDNBadgeTypeApple;
+
+	if ([_badgeName isEqualToString:@"Dribbble"])
+		_badgeType = kDNBadgeTypeDribbble;
+
+	if ([_badgeName isEqualToString:@"Type"])
+		_badgeType = kDNBadgeTypeType;
+
+}
+
 -(UIColor *) badgeColor
 {
-	if ([_badgeName isEqualToString:@"Ask"])
-		return [UIColor DNBadgeColorAsk];
-	if ([_badgeName isEqualToString:@"Flat"])
-		return [UIColor DNBadgeColorFlat];
-	if ([_badgeName isEqualToString:@"Discussion"])
-		return [UIColor DNBadgeColorDiscussion];
-	if ([_badgeName isEqualToString:@"SiteDesign"])
-		return [UIColor DNBadgeColorSiteDesign];
-	if ([_badgeName isEqualToString:@"CSS"])
-		return [UIColor DNBadgeColorCSS];
-	if ([_badgeName isEqualToString:@"Apple"])
-		return [UIColor DNBadgeColorApple];
-	if ([_badgeName isEqualToString:@"Dribbble"])
-		return [UIColor DNBadgeColorDribbble];
-	if ([_badgeName isEqualToString:@"Type"])
-		return [UIColor DNBadgeColorType];
-	
-	
-	return [UIColor clearColor];
+	switch (_badgeType) {
+		case kDNBadgeTypeAsk:
+			return [UIColor DNBadgeColorAsk];
+			break;
+		case kDNBadgeTypeFlat:
+			return [UIColor DNBadgeColorFlat];
+			break;
+		case kDNBadgeTypeDiscussion:
+			return [UIColor DNBadgeColorDiscussion];
+			break;
+		case kDNBadgeTypeShow:
+			return [UIColor DNBadgeColorShow];
+			break;
+		case kDNBadgeTypeSiteDesign:
+			return [UIColor DNBadgeColorSiteDesign];
+			break;
+		case kDNBadgeTypeCSS:
+			return [UIColor DNBadgeColorCSS];
+			break;
+		case kDNBadgeTypeApple:
+			return [UIColor DNBadgeColorApple];
+			break;
+		case kDNBadgeTypeDribbble:
+			return [UIColor DNBadgeColorDribbble];
+			break;
+		case kDNBadgeTypeType:
+			return [UIColor DNBadgeColorType];
+			break;
+		default:
+			return [UIColor clearColor];
+			break;
+	}
+}
+
+-(BOOL)isRead
+{
+	return [DNCrawler isRead:self];
+}
+-(void)markRead
+{
+	[DNCrawler markRead:self];
 }
 
 @end
